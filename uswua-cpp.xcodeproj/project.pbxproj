@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		97A9CC662C6E3723000DC5BF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC652C6E3723000DC5BF /* main.cpp */; };
+		97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC702C6E39F8000DC5BF /* opcode.cpp */; };
+		97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC732C6E44BB000DC5BF /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,8 +25,10 @@
 
 /* Begin PBXFileReference section */
 		97A9CC622C6E3723000DC5BF /* uswua-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "uswua-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
-		97A9CC652C6E3723000DC5BF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		97A9CC6C2C6E37CF000DC5BF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		97A9CC702C6E39F8000DC5BF /* opcode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = opcode.cpp; sourceTree = "<group>"; };
+		97A9CC712C6E39F8000DC5BF /* opcode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = opcode.hpp; sourceTree = "<group>"; };
+		97A9CC732C6E44BB000DC5BF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,8 +45,9 @@
 		97A9CC592C6E3723000DC5BF = {
 			isa = PBXGroup;
 			children = (
+				97A9CC732C6E44BB000DC5BF /* main.cpp */,
 				97A9CC6C2C6E37CF000DC5BF /* .gitignore */,
-				97A9CC642C6E3723000DC5BF /* uswua-cpp */,
+				97A9CC642C6E3723000DC5BF /* uswua */,
 				97A9CC632C6E3723000DC5BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +60,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		97A9CC642C6E3723000DC5BF /* uswua-cpp */ = {
+		97A9CC642C6E3723000DC5BF /* uswua */ = {
 			isa = PBXGroup;
 			children = (
-				97A9CC652C6E3723000DC5BF /* main.cpp */,
+				97A9CC702C6E39F8000DC5BF /* opcode.cpp */,
+				97A9CC712C6E39F8000DC5BF /* opcode.hpp */,
 			);
-			path = "uswua-cpp";
+			path = uswua;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,7 +126,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97A9CC662C6E3723000DC5BF /* main.cpp in Sources */,
+				97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */,
+				97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
