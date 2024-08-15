@@ -42,6 +42,7 @@
 		97A9CC592C6E3723000DC5BF = {
 			isa = PBXGroup;
 			children = (
+				97A9CC6C2C6E37CF000DC5BF /* .gitignore */,
 				97A9CC642C6E3723000DC5BF /* uswua-cpp */,
 				97A9CC632C6E3723000DC5BF /* Products */,
 			);
@@ -58,7 +59,6 @@
 		97A9CC642C6E3723000DC5BF /* uswua-cpp */ = {
 			isa = PBXGroup;
 			children = (
-				97A9CC6C2C6E37CF000DC5BF /* .gitignore */,
 				97A9CC652C6E3723000DC5BF /* main.cpp */,
 			);
 			path = "uswua-cpp";
