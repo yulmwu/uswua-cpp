@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		97A9CC622C6E3723000DC5BF /* uswua-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "uswua-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97A9CC652C6E3723000DC5BF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		97A9CC6C2C6E37CF000DC5BF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 		97A9CC642C6E3723000DC5BF /* uswua-cpp */ = {
 			isa = PBXGroup;
 			children = (
+				97A9CC6C2C6E37CF000DC5BF /* .gitignore */,
 				97A9CC652C6E3723000DC5BF /* main.cpp */,
 			);
 			path = "uswua-cpp";
