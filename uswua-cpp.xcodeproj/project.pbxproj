@@ -38,6 +38,7 @@
 		97A9DB0F2C70C30100185295 /* stack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = stack.hpp; sourceTree = "<group>"; };
 		97A9DB112C70C4BA00185295 /* vm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vm.cpp; sourceTree = "<group>"; };
 		97A9DB122C70C4BA00185295 /* vm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vm.hpp; sourceTree = "<group>"; };
+		97A9DB142C70CC6600185295 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		97A9CC592C6E3723000DC5BF = {
 			isa = PBXGroup;
 			children = (
+				97A9DB142C70CC6600185295 /* README.md */,
 				97A9CC732C6E44BB000DC5BF /* main.cpp */,
 				97A9CC6C2C6E37CF000DC5BF /* .gitignore */,
 				97A9CC642C6E3723000DC5BF /* uswua */,
