@@ -1,4 +1,5 @@
 #include "opcode.hpp"
+#include "error.hpp"
 
 Op::Op(Opcode op, std::optional<Value> val) : opcode(op), operand(val) {}
 
@@ -39,7 +40,7 @@ Opcode to_opcode(uint8_t value) {
         case 0x2D: return Opcode::JIF;
         case 0xFE: return Opcode::DBG;
         case 0xFF: return Opcode::EXIT;
-        default: throw std::invalid_argument("Invalid Opcode value");
+        default: throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode);
     }
 }
 

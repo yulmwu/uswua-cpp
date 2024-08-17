@@ -5,6 +5,7 @@
 #include <optional>
 #include <cstdint>
 #include <stdexcept>
+#include <vector>
 
 enum class Opcode : uint8_t {
     NOOP = 0x00,
@@ -49,12 +50,13 @@ struct Op {
     std::optional<Value> operand;
 
     Op(Opcode op, std::optional<Value> val);
-
     void display(std::ostream& os) const;
 };
 
 Opcode to_opcode(uint8_t value);
 
 std::ostream& operator<<(std::ostream& os, const Op& op);
+
+typedef std::vector<Op> Instructions;
 
 #endif // OPCODE_HPP
