@@ -5,6 +5,12 @@
 #include "stack.hpp"
 #include "error.hpp"
 
+enum class OpExecuted {
+    OK,
+    CONTINUE,
+    BREAK
+};
+
 class Vm {
 public:
     Instructions instructions;
@@ -12,7 +18,8 @@ public:
     Vm(Instructions instructions) : instructions(instructions)
     {}
     void execute();
-    Value getOperand(Op op, Pointer ptr);
+    Value getOperand(Op& op, Pointer ptr);
+    OpExecuted executeOp(Op& op, Pointer ptr);
     
 private:
     Stack stack;
