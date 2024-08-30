@@ -4,10 +4,10 @@
 Op::Op(Opcode op, std::optional<Value> val) : opcode(op), operand(val) {}
 
 void Op::display(std::ostream& os) const {
-    os << static_cast<int>(opcode);
+    os << static_cast<int>(this->opcode);
 
-    if (operand.has_value()) {
-        os << " " << operand.value();
+    if (this->operand.has_value()) {
+        os << " " << this->operand.value();
     }
 }
 
