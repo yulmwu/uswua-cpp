@@ -44,6 +44,7 @@ enum class Opcode : uint8_t {
 };
 
 typedef ssize_t Value;
+typedef size_t Pointer;
 
 struct Op {
     Opcode opcode;
