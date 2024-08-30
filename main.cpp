@@ -29,7 +29,7 @@ int main() {
         cout << "vm test ---" << endl;
         
         Vm *vm = new Vm(tests);
-        vm -> execute();
+        vm->execute();
     } catch (const BytecodeError& e) {
         cerr << "ByteCodeError: " << e.what() << endl;
     }
