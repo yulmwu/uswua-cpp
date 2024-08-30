@@ -7,7 +7,8 @@ class BytecodeError : public std::runtime_error {
 public:
     enum class BytecodeErrorKind {
         EmptyStack,
-        InvalidOpcode
+        InvalidOpcode,
+        EmptyOpcode
     };
 
     explicit BytecodeError(BytecodeErrorKind kind);
