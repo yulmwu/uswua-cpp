@@ -2,14 +2,14 @@
 #include "error.hpp"
 
 void Stack::push(Value value) {
-    values_.push_back(value);
+    this->values_.push_back(value);
 }
 
 Value Stack::pop() {
-    if (values_.empty()) {
+    if (this->values_.empty()) {
         throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyStack);
     }
-    Value value = values_.back();
-    values_.pop_back();
+    Value value = this -> values_.back();
+    this->values_.pop_back();
     return value;
 }
