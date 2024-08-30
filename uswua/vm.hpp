@@ -12,6 +12,7 @@ public:
     Vm(Instructions instructions) : instructions(instructions)
     {}
     void execute();
+    Value getOperand(Op op, Pointer ptr);
     
 private:
     Stack stack;
