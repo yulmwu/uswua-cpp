@@ -11,7 +11,7 @@ void Op::display(std::ostream& os) const {
     }
 }
 
-Opcode to_opcode(uint8_t value) {
+Opcode to_opcode(uint8_t value, Pointer ptr) {
     switch (value) {
         case 0x00: return Opcode::NOOP;
         case 0x01: return Opcode::PUSH;
@@ -40,7 +40,7 @@ Opcode to_opcode(uint8_t value) {
         case 0x2D: return Opcode::JIF;
         case 0xFE: return Opcode::DBG;
         case 0xFF: return Opcode::EXIT;
-        default: throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode);
+        default: throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, ptr);
     }
 }
 

@@ -54,7 +54,7 @@ struct Op {
     void display(std::ostream& os) const;
 };
 
-Opcode to_opcode(uint8_t value);
+Opcode to_opcode(uint8_t value, Pointer ptr = 0);
 
 std::ostream& operator<<(std::ostream& os, const Op& op);
 
