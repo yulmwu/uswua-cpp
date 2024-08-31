@@ -6,7 +6,7 @@
 
 class Stack {
 public:
-    Value pop();
+    Value pop(Pointer ptr);
 
     Stack() = default;
 

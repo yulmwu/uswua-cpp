@@ -5,11 +5,11 @@ void Stack::push(Value value) {
     this->values_.push_back(value);
 }
 
-Value Stack::pop() {
+Value Stack::pop(Pointer ptr) {
     if (this->values_.empty()) {
-        throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyStack);
+        throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyStack, ptr);
     }
-    Value value = this -> values_.back();
+    auto value = this -> values_.back();
     this->values_.pop_back();
     return value;
 }
