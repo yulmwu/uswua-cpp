@@ -1,6 +1,7 @@
 #ifndef vm_hpp
 #define vm_hpp
 
+#include "map"
 #include "opcode.hpp"
 #include "stack.hpp"
 #include "error.hpp"
@@ -15,7 +16,7 @@ class Vm {
 public:
     Instructions instructions;
     
-    Vm(Instructions instructions) : instructions(instructions)
+    Vm(Instructions instructions) : instructions(instructions), stack(), heap()
     {}
     void execute();
     Value getOperand(Op& op, Pointer ptr);
@@ -23,6 +24,7 @@ public:
     
 private:
     Stack stack;
+    std::map<Pointer, Value> heap;
 };
 
 #endif /* vm_hpp */
