@@ -10,28 +10,30 @@ int main() {
     uint8_t bytecode = 0x01;
     
     try {
-        Opcode opcode = to_opcode(bytecode);
+        auto opcode = to_opcode(bytecode);
         
         cout << "Opcode: " << static_cast<int>(opcode) << endl;
         
-        Op op1 = Op(opcode, nullopt);
+        auto op1 = Op(opcode, nullopt);
         cout << "Op1: " << op1 << endl;
         
-        Op op2 = Op(opcode, 3);
+        auto op2 = Op(opcode, 3);
         cout << "Op2: " << op2 << endl;
         
+        cout << "----- vm test -----" << endl;
+        
         vector tests = {
-            Op(to_opcode(0x01), 10),
-            Op(to_opcode(0xFE), 20),
+            Op(to_opcode(0x01), 10), // PUSH 10
+            Op(to_opcode(0x02), 0), // STORE (addr)0
+            Op(to_opcode(0x03), 0), // LOAD (addr)0
+            Op(to_opcode(0xFE), 20), // DBG
             Op(to_opcode(0x00), nullopt),
         };
-        
-        cout << "vm test ---" << endl;
         
         Vm *vm = new Vm(tests);
         vm->execute();
     } catch (const BytecodeError& e) {
-        cerr << "ByteCodeError: " << e.what() << endl;
+        cerr << "ByteCodeError: " << e.what() << " on (ptr)" << e.where() << endl;
     }
     
     return 0;
