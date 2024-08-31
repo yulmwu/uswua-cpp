@@ -1,4 +1,6 @@
 #include "iostream"
+#include "vector"
+#include "ranges"
 #include "vm.hpp"
 
 void Vm::execute() {
@@ -55,4 +57,20 @@ OpExecuted Vm::executeOp(Op &op, Pointer ptr) {
     }
 
     return OpExecuted::OK;
+}
+
+void Vm::stackDump() {
+    std::cout << "----- dumping stack -----" << std::endl;
+    for (auto i = 0; i < this->stack.values_.size(); i++) {
+        std::cout << i << ": " << stack.values_[i] << std::endl;
+    }
+    std::cout << "-------------------------" << std::endl;
+}
+
+void Vm::heapDump() {
+    std::cout << "----- dumping heap -----" << std::endl;
+    for (const auto& pair : this->heap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+    std::cout << "------------------------" << std::endl;
 }

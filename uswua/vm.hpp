@@ -21,6 +21,9 @@ public:
     void execute();
     Value getOperand(Op& op, Pointer ptr);
     OpExecuted executeOp(Op& op, Pointer ptr);
+
+    void stackDump();
+    void heapDump();
     
 private:
     Stack stack;
