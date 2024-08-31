@@ -23,15 +23,21 @@ int main() {
         cout << "----- vm test -----" << endl;
         
         vector tests = {
-            Op(to_opcode(0x01), 10), // PUSH 10
-            Op(to_opcode(0x02), 0), // STORE (addr)0
-            Op(to_opcode(0x03), 0), // LOAD (addr)0
+            Op(to_opcode(0x01), 10), // PUSH 10 -> stack[10] heap{}
+            Op(to_opcode(0x01), 20), // PUSH 20 -> stack[10, 20] heap{}
+            Op(to_opcode(0x01), 30), // PUSH 30 -> stack[10, 20, 30] heap{}
+            Op(to_opcode(0x02), 0), // STORE (addr)0 -> stack[10, 20] heap{0:30}
+            Op(to_opcode(0x02), 1), // STORE (addr)1 -> stack[10] heap{0:30,1:20}
+            Op(to_opcode(0x03), 0), // LOAD (addr)0 -> stack[10, 30] heap{0:30,1:20}
             Op(to_opcode(0xFE), 20), // DBG
             Op(to_opcode(0x00), nullopt),
         };
         
         Vm *vm = new Vm(tests);
         vm->execute();
+        
+        vm->stackDump();
+        vm->heapDump();
     } catch (const BytecodeError& e) {
         cerr << "ByteCodeError: " << e.what() << " on (ptr)" << e.where() << endl;
     }
