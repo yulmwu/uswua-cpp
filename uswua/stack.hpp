@@ -6,13 +6,13 @@
 
 class Stack {
 public:
+    std::vector<Value> values_;
+
     Value pop(Pointer ptr);
 
     Stack() = default;
 
     void push(Value value);
-private:
-    std::vector<Value> values_;
 };
 
 #endif /* stack_hpp */
