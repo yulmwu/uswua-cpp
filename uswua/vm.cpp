@@ -50,6 +50,41 @@ OpExecuted Vm::executeOp(Op &op, Pointer ptr) {
             this->stack.push(value->second);
             break;
         }
+        case Opcode::ADD: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left + right);
+            break;
+        }
+        case Opcode::SUB: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left - right);
+            break;
+        }
+        case Opcode::MUL: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left * right);
+            break;
+        }
+        case Opcode::DIV: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left / right);
+            break;
+        }
+        case Opcode::MOD: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left % right);
+            break;
+        }
         default: {
             std::logic_error("not implemented");
             break;
