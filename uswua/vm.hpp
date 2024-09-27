@@ -2,6 +2,7 @@
 #define vm_hpp
 
 #include "map"
+#include "vector"
 #include "opcode.hpp"
 #include "stack.hpp"
 #include "error.hpp"
@@ -28,6 +29,7 @@ public:
 private:
     Stack stack;
     std::map<Pointer, Value> heap;
+    std::vector<Pointer> callStack;
 };
 
 #endif /* vm_hpp */
