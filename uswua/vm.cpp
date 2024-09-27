@@ -85,6 +85,82 @@ OpExecuted Vm::executeOp(Op &op, Pointer ptr) {
             this->stack.push(left % right);
             break;
         }
+        case Opcode::AND: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left & right);
+            break;
+        }
+        case Opcode::OR: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left | right);
+            break;
+        }
+        case Opcode::XOR: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left ^ right);
+            break;
+        }
+        case Opcode::NOT: {
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(!right);
+            break;
+        }
+        case Opcode::LSF: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left << right);
+            break;
+        }
+        case Opcode::RSF: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left >> right);
+            break;
+        }
+        case Opcode::EQ: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left == right);
+            break;
+        }
+        case Opcode::GT: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left > right);
+            break;
+        }
+        case Opcode::LT: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left < right);
+            break;
+        }
+        case Opcode::GTE: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left >= right);
+            break;
+        }
+        case Opcode::LTE: {
+            auto left = this->stack.pop(ptr);
+            auto right = this->stack.pop(ptr);
+
+            this->stack.push(left <= right);
+            break;
+        }
         default: {
             std::logic_error("not implemented");
             break;
