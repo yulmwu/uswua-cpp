@@ -17,16 +17,17 @@ class Vm {
 public:
     Instructions instructions;
     
-    Vm(Instructions instructions) : instructions(instructions), stack(), heap()
+    Vm(Instructions instructions) : instructions(instructions), stack(), heap(), ptr(0)
     {}
     void execute();
-    Value getOperand(Op& op, Pointer ptr);
-    OpExecuted executeOp(Op& op, Pointer ptr);
+    Value getOperand(Op& op);
+    OpExecuted executeOp(Op& op);
 
     void stackDump();
     void heapDump();
     
 private:
+    Pointer ptr;
     Stack stack;
     std::map<Pointer, Value> heap;
     std::vector<Pointer> callStack;
