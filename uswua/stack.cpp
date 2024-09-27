@@ -9,7 +9,7 @@ Value Stack::pop(Pointer ptr) {
     if (this->values_.empty()) {
         throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyStack, ptr);
     }
-    auto value = this -> values_.back();
+    auto value = this->values_.back();
     this->values_.pop_back();
     return value;
 }
