@@ -168,6 +168,17 @@ OpExecuted Vm::executeOp(Op &op) {
             this->ptr = (Pointer)this->getOperand(op) + 1;
             return OpExecuted::CONTINUE;
         }
+        case Opcode::RET: {
+            if (this->callStack.empty()) {
+                throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyCallStack, ptr);
+            }
+
+            auto ptr = this->callStack.back();
+            this->callStack.pop_back();
+            
+            this->ptr = ptr;
+            return OpExecuted::CONTINUE;
+        }
         // TODO: RET..
         default: {
             std::logic_error("not implemented");
