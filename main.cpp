@@ -30,6 +30,12 @@ int main() {
             Op(to_opcode(0x02), 1), // STORE (addr)1 -> stack[10] heap{0:30,1:20}
             Op(to_opcode(0x03), 0), // LOAD (addr)0 -> stack[10, 30] heap{0:30,1:20}
             Op(to_opcode(0xFE), 20), // DBG
+            
+            Op(to_opcode(0x28), 2),
+            Op(to_opcode(0x00), nullopt),
+            Op(to_opcode(0x2A), nullopt),
+            Op(to_opcode(0x29), 7),
+            
             Op(to_opcode(0x00), nullopt),
         };
         
