@@ -12,6 +12,7 @@ public:
         InvalidOpcode,
         EmptyOperand,
         NotFound,
+        EmptyCallStack
     };
 
     explicit BytecodeError(BytecodeErrorKind kind, Pointer ptr);

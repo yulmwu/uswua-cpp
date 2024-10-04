@@ -13,6 +13,8 @@ const char* BytecodeError::what() const noexcept {
             return "EmptyOperand";
         case BytecodeErrorKind::NotFound:
             return "NotFound";
+        case BytecodeErrorKind::EmptyCallStack:
+            return "EmptyCallStack";
     }
 }
 
