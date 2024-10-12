@@ -1,8 +1,6 @@
-//
-//  all.cpp
-//  uswua-cpp
-//
-//  Created by Kim Jun Young on 10/12/24.
-//
+#include "tests.cpp"
+#include "case_1.cpp"
 
-#include <stdio.h>
+void TESTS_RUN_ALL() {
+    RUN_TEST(case_1);
+}
