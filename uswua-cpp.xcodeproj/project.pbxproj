@@ -28,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		971D21722CBAAC5C00722147 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		971D21762CBAB0B400722147 /* case_1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_1.cpp; sourceTree = "<group>"; };
+		971D21782CBAB12700722147 /* all.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = all.cpp; sourceTree = "<group>"; };
+		971D21792CBAB16C00722147 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		97A9CC622C6E3723000DC5BF /* uswua-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "uswua-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97A9CC6C2C6E37CF000DC5BF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		97A9CC702C6E39F8000DC5BF /* opcode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = opcode.cpp; sourceTree = "<group>"; };
@@ -57,6 +60,9 @@
 			isa = PBXGroup;
 			children = (
 				971D21722CBAAC5C00722147 /* tests.cpp */,
+				971D21762CBAB0B400722147 /* case_1.cpp */,
+				971D21782CBAB12700722147 /* all.cpp */,
+				971D21792CBAB16C00722147 /* README.md */,
 			);
 			path = tests;
 			sourceTree = "<group>";
