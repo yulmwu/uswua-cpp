@@ -4,7 +4,7 @@
 #include "error.hpp"
 #include "vm.hpp"
 
-#include "tests/tests.cpp"
+#include "tests/all.cpp"
 
 using namespace std;
 
