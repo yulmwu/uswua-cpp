@@ -4,7 +4,7 @@
 Op::Op(Opcode op, std::optional<Value> val) : opcode(op), operand(val) {}
 
 void Op::display(std::ostream& os) const {
-    os << static_cast<int>(this->opcode);
+    os << opcode;
 
     if (this->operand.has_value()) {
         os << " " << this->operand.value();
@@ -46,5 +46,10 @@ Opcode to_opcode(uint8_t value, Pointer ptr) {
 
 std::ostream& operator<<(std::ostream& os, const Op& op) {
     op.display(os);
+    return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const Opcode& opcode) {
+    os << "0x" << std::hex << static_cast<int>(opcode);
     return os;
 }
