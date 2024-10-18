@@ -1,8 +1,14 @@
-//
-//  case_2.cpp
-//  uswua-cpp
-//
-//  Created by Kim Jun Young on 10/18/24.
-//
+#include <iostream>
+#include <vector>
+#include "tests.cpp"
 
-#include <stdio.h>
+using namespace std;
+
+TEST_CASE(case_2) {
+    vector tests = {
+        Op(to_opcode(0x01), 10)
+    };
+    
+    auto *vm = new Vm(tests);
+    vm->execute();
+}
