@@ -25,8 +25,6 @@ Value Vm::getOperand(Op& op) {
 }
 
 OpExecuted Vm::executeOp(Op &op) {
-    std::cout << ptr << ": " << op << std::endl;
-
     switch (op.opcode) {
         case Opcode::NOOP: break;
         case Opcode::PUSH: {
