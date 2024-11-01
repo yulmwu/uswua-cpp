@@ -17,7 +17,9 @@ class Vm {
 public:
     Instructions instructions;
     
-    Vm(Instructions instructions) : instructions(instructions), stack(), heap(), ptr(0)
+    Vm(Instructions instructions)
+        : instructions(instructions), stack(*(new Stack())), heap(), ptr(0) {}
+    Vm(Instructions instructions, Stack& stack) : instructions(instructions), stack(stack), heap(), ptr(0)
     {}
     void execute();
     Value getOperand(Op& op);
@@ -28,7 +30,7 @@ public:
     
 private:
     Pointer ptr;
-    Stack stack;
+    Stack& stack;
     std::map<Pointer, Value> heap;
     std::vector<Pointer> callStack;
 };
