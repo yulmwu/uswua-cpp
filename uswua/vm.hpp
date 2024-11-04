@@ -19,8 +19,8 @@ public:
     
     Vm(Instructions instructions)
         : instructions(instructions), stack(*(new Stack())), heap(), ptr(0) {}
-    Vm(Instructions instructions, Stack& stack) : instructions(instructions), stack(stack), heap(), ptr(0)
-    {}
+    Vm(Instructions instructions, Stack& stack)
+        : instructions(instructions), stack(stack), heap(), ptr(0) {}
     void execute();
     Value getOperand(Op& op);
     OpExecuted executeOp(Op& op);
