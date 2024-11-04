@@ -10,8 +10,8 @@ TEST_CASE(case_2) {
     };
     
     Stack stack;
-    auto *vm = new Vm(tests, stack);
-    vm->execute();
+    Vm vm = Vm(tests, stack);
+    vm.execute();
 
     ASSERT_EQ(stack.values_[0], 10);
 }
