@@ -58,6 +58,10 @@ Opcode to_opcode(uint8_t value, Pointer ptr = 0);
 
 std::ostream& operator<<(std::ostream& os, const Opcode& opcode);
 std::ostream& operator<<(std::ostream& os, const Op& op);
+bool operator==(const Op& op1, const Op& op2);
+bool operator!=(const Op& op1, const Op& op2) {
+    return !(op1 == op2);
+}
 
 typedef std::vector<Op> Instructions;
 

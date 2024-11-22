@@ -1,13 +1,9 @@
-//
-//  b2i.hpp
-//  uswua-cpp
-//
-//  Created by Kim Jun Young on 11/22/24.
-//
-
 #ifndef b2i_hpp
 #define b2i_hpp
 
-#include <stdio.h>
+#include <vector>
+#include "../uswua-core/opcode.hpp"
+
+Instructions b2i_from(std::vector<unsigned char>);
 
 #endif /* b2i_hpp */

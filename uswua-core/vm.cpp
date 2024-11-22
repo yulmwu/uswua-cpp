@@ -1,6 +1,7 @@
-#include "iostream"
-#include "vector"
-#include "ranges"
+#include <iostream>
+#include <vector>
+#include <ranges>
+
 #include "vm.hpp"
 
 void Vm::execute() {

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		971ADCA62CF00B5300BA4EDB /* b2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971ADCA12CEFF7D400BA4EDB /* b2i.cpp */; };
+		9798293C2CF0126800ACCC32 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D21722CBAAC5C00722147 /* tests.cpp */; };
+		9798293D2CF0126B00ACCC32 /* tests_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D21782CBAB12700722147 /* tests_all.cpp */; };
+		9798293E2CF0126E00ACCC32 /* case_1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D21762CBAB0B400722147 /* case_1.cpp */; };
+		9798293F2CF0127000ACCC32 /* case_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 978E1D1B2CC1D61600BE7B59 /* case_2.cpp */; };
+		979829402CF0127200ACCC32 /* case_b2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971ADCA42CF0017C00BA4EDB /* case_b2i.cpp */; };
 		97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC702C6E39F8000DC5BF /* opcode.cpp */; };
 		97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC732C6E44BB000DC5BF /* main.cpp */; };
 		97A9DB0D2C70C01400185295 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0B2C70C01400185295 /* error.cpp */; };
@@ -27,6 +33,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		971ADCA12CEFF7D400BA4EDB /* b2i.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2i.cpp; sourceTree = "<group>"; };
+		971ADCA22CEFF7D400BA4EDB /* b2i.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = b2i.hpp; sourceTree = "<group>"; };
+		971ADCA42CF0017C00BA4EDB /* case_b2i.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_b2i.cpp; sourceTree = "<group>"; };
 		971D21722CBAAC5C00722147 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
 		971D21762CBAB0B400722147 /* case_1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_1.cpp; sourceTree = "<group>"; };
 		971D21782CBAB12700722147 /* tests_all.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests_all.cpp; sourceTree = "<group>"; };
@@ -57,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		971ADCA02CEFF55200BA4EDB /* uswua-utils */ = {
+			isa = PBXGroup;
+			children = (
+				971ADCA12CEFF7D400BA4EDB /* b2i.cpp */,
+				971ADCA22CEFF7D400BA4EDB /* b2i.hpp */,
+			);
+			path = "uswua-utils";
+			sourceTree = "<group>";
+		};
 		971D21752CBAAF0B00722147 /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +83,7 @@
 				971D21792CBAB16C00722147 /* README.md */,
 				971D21762CBAB0B400722147 /* case_1.cpp */,
 				978E1D1B2CC1D61600BE7B59 /* case_2.cpp */,
+				971ADCA42CF0017C00BA4EDB /* case_b2i.cpp */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -75,7 +94,8 @@
 				97A9DB142C70CC6600185295 /* README.md */,
 				97A9CC732C6E44BB000DC5BF /* main.cpp */,
 				97A9CC6C2C6E37CF000DC5BF /* .gitignore */,
-				97A9CC642C6E3723000DC5BF /* uswua */,
+				97A9CC642C6E3723000DC5BF /* uswua-core */,
+				971ADCA02CEFF55200BA4EDB /* uswua-utils */,
 				971D21752CBAAF0B00722147 /* tests */,
 				97A9CC632C6E3723000DC5BF /* Products */,
 			);
@@ -89,7 +109,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		97A9CC642C6E3723000DC5BF /* uswua */ = {
+		97A9CC642C6E3723000DC5BF /* uswua-core */ = {
 			isa = PBXGroup;
 			children = (
 				97A9DB112C70C4BA00185295 /* vm.cpp */,
@@ -101,7 +121,7 @@
 				97A9DB0E2C70C30100185295 /* stack.cpp */,
 				97A9DB0F2C70C30100185295 /* stack.hpp */,
 			);
-			path = uswua;
+			path = "uswua-core";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,10 +181,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9798293C2CF0126800ACCC32 /* tests.cpp in Sources */,
+				9798293D2CF0126B00ACCC32 /* tests_all.cpp in Sources */,
+				9798293E2CF0126E00ACCC32 /* case_1.cpp in Sources */,
 				97A9DB132C70C4BA00185295 /* vm.cpp in Sources */,
+				979829402CF0127200ACCC32 /* case_b2i.cpp in Sources */,
 				97A9DB102C70C30100185295 /* stack.cpp in Sources */,
 				97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */,
+				971ADCA62CF00B5300BA4EDB /* b2i.cpp in Sources */,
 				97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */,
+				9798293F2CF0127000ACCC32 /* case_2.cpp in Sources */,
 				97A9DB0D2C70C01400185295 /* error.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

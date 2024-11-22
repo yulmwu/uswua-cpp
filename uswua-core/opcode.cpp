@@ -53,3 +53,7 @@ std::ostream& operator<<(std::ostream& os, const Opcode& opcode) {
     os << "0x" << std::hex << static_cast<int>(opcode);
     return os;
 }
+
+bool operator==(const Op& op1, const Op& op2) {
+    return op1.opcode == op2.opcode && op1.operand == op2.operand;
+}
