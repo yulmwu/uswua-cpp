@@ -57,3 +57,7 @@ std::ostream& operator<<(std::ostream& os, const Opcode& opcode) {
 bool operator==(const Op& op1, const Op& op2) {
     return op1.opcode == op2.opcode && op1.operand == op2.operand;
 }
+
+bool operator!=(const Op& op1, const Op& op2) {
+    return !(op1 == op2);
+}

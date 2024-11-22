@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		971ADCA62CF00B5300BA4EDB /* b2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971ADCA12CEFF7D400BA4EDB /* b2i.cpp */; };
-		9798293C2CF0126800ACCC32 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D21722CBAAC5C00722147 /* tests.cpp */; };
-		9798293D2CF0126B00ACCC32 /* tests_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D21782CBAB12700722147 /* tests_all.cpp */; };
-		9798293E2CF0126E00ACCC32 /* case_1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971D21762CBAB0B400722147 /* case_1.cpp */; };
-		9798293F2CF0127000ACCC32 /* case_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 978E1D1B2CC1D61600BE7B59 /* case_2.cpp */; };
-		979829402CF0127200ACCC32 /* case_b2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971ADCA42CF0017C00BA4EDB /* case_b2i.cpp */; };
 		97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC702C6E39F8000DC5BF /* opcode.cpp */; };
 		97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC732C6E44BB000DC5BF /* main.cpp */; };
 		97A9DB0D2C70C01400185295 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0B2C70C01400185295 /* error.cpp */; };
@@ -181,16 +176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9798293C2CF0126800ACCC32 /* tests.cpp in Sources */,
-				9798293D2CF0126B00ACCC32 /* tests_all.cpp in Sources */,
-				9798293E2CF0126E00ACCC32 /* case_1.cpp in Sources */,
 				97A9DB132C70C4BA00185295 /* vm.cpp in Sources */,
-				979829402CF0127200ACCC32 /* case_b2i.cpp in Sources */,
 				97A9DB102C70C30100185295 /* stack.cpp in Sources */,
 				97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */,
 				971ADCA62CF00B5300BA4EDB /* b2i.cpp in Sources */,
 				97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */,
-				9798293F2CF0127000ACCC32 /* case_2.cpp in Sources */,
 				97A9DB0D2C70C01400185295 /* error.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
