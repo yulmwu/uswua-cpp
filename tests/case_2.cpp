@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
+
 #include "tests.cpp"
+#include "../uswua-core/opcode.hpp"
+#include "../uswua-core/vm.hpp"
+#include "../uswua-core/stack.hpp"
 
 using namespace std;
 

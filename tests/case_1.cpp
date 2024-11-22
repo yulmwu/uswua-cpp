@@ -1,5 +1,7 @@
 #include <iostream>
+
 #include "tests.cpp"
+#include "../uswua-core/opcode.hpp"
 
 using namespace std;
 
