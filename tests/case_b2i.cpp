@@ -6,7 +6,6 @@
 #include "../uswua-core/opcode.hpp"
 #include "../uswua-utils/b2i.hpp"
 
-
 using namespace std;
 
 TEST_CASE(case_b2i) {
