@@ -178,7 +178,16 @@ OpExecuted Vm::executeOp(Op &op) {
             this->ptr = ptr;
             return OpExecuted::CONTINUE;
         }
-        // TODO: RET..
+        case Opcode::JMP: {
+            this->ptr = (Pointer)this->getOperand(op);
+            return OpExecuted::CONTINUE;
+        }
+        case Opcode::JIF: {
+            if (this->stack.pop(this->ptr) == 0) {
+                this->ptr = (Pointer)this->getOperand(op);
+                return OpExecuted::CONTINUE;
+            }
+        }
         default: {
             std::logic_error("not implemented");
             break;
