@@ -10,7 +10,8 @@ using namespace std;
 
 TEST_CASE(case_2) {
     vector tests = {
-        Op(to_opcode(0x01), 10)
+        Op(to_opcode(0x01), 10),
+        Op(to_opcode(0xFE), 0x05),
     };
     
     Stack stack;

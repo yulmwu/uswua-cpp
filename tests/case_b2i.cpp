@@ -10,7 +10,7 @@ using namespace std;
 
 TEST_CASE(case_b2i) {
     vector<unsigned char> bytes = {
-        0x28, 0x02, 0x00, 0x2a, 0x29, 0x00, 0x00
+        0x28, 0x02, 0x00, 0x2a, 0x29, 0x00, 0xFE, 0x05, 0x00
     };
     
     using enum Opcode;
@@ -20,6 +20,7 @@ TEST_CASE(case_b2i) {
         Op(NOOP, nullopt),
         Op(RET, nullopt),
         Op(CALL, 0x00),
+        Op(DBG, 0x05),
         Op(NOOP, nullopt),
     };
     
