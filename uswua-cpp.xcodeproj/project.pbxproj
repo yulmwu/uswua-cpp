@@ -13,6 +13,7 @@
 		97A9DB0D2C70C01400185295 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0B2C70C01400185295 /* error.cpp */; };
 		97A9DB102C70C30100185295 /* stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0E2C70C30100185295 /* stack.cpp */; };
 		97A9DB132C70C4BA00185295 /* vm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB112C70C4BA00185295 /* vm.cpp */; };
+		97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C69E6D2CF6959500E7DFA5 /* time.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,8 @@
 		97A9DB112C70C4BA00185295 /* vm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vm.cpp; sourceTree = "<group>"; };
 		97A9DB122C70C4BA00185295 /* vm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vm.hpp; sourceTree = "<group>"; };
 		97A9DB142C70CC6600185295 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		97C69E6D2CF6959500E7DFA5 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
+		97C69E6E2CF6959500E7DFA5 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 			children = (
 				971ADCA12CEFF7D400BA4EDB /* b2i.cpp */,
 				971ADCA22CEFF7D400BA4EDB /* b2i.hpp */,
+				97C69E6D2CF6959500E7DFA5 /* time.cpp */,
+				97C69E6E2CF6959500E7DFA5 /* time.hpp */,
 			);
 			path = "uswua-utils";
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97A9DB132C70C4BA00185295 /* vm.cpp in Sources */,
+				97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */,
 				97A9DB102C70C30100185295 /* stack.cpp in Sources */,
 				97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */,
 				971ADCA62CF00B5300BA4EDB /* b2i.cpp in Sources */,

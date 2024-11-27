@@ -3,6 +3,7 @@
 #include <ranges>
 
 #include "vm.hpp"
+#include "../uswua-utils/time.hpp"
 
 void Vm::execute() {
     while (instructions.size() > ptr)
@@ -187,10 +188,18 @@ OpExecuted Vm::executeOp(Op &op) {
                 this->ptr = (Pointer)this->getOperand(op);
                 return OpExecuted::CONTINUE;
             }
-        }
-        default: {
-            std::logic_error("not implemented");
+            
             break;
+        }
+        case Opcode::DBG: {
+            std::cout << std::endl;
+            std::cout << "[" << current_time() << "] ";
+            std::cout << "operand: " << op.operand.value();
+            std::cout << std::endl << std::endl;
+            break;
+        }
+        case Opcode::EXIT: {
+            return OpExecuted::BREAK;
         }
     }
 
