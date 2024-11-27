@@ -1,13 +1,11 @@
-//
-//  time.hpp
-//  uswua-cpp
-//
-//  Created by Kim Jun Young on 11/27/24.
-//
-
 #ifndef time_hpp
 #define time_hpp
 
-#include <stdio.h>
+#include <iostream>
+#include <chrono>
+#include <iomanip>
+#include <sstream>
+
+std::string current_time();
 
 #endif /* time_hpp */
