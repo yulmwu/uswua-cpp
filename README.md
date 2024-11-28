@@ -23,7 +23,7 @@
 | opcode  | hex    | description | operand | notation | extended |
 |---------|--------|-------------|---------|----------|----------|
 | `AND`   | `0x18` | Pop and `and` logical operation two values in the stack and push the values to the stack | | `stack <- stack:pop && stack:pop` | |
-| `OR`   | `0x19` | Pop and `or` logical operation two values in the stack and push the values to the stack | | `stack <- stack:pop || stack:pop` | |
+| `OR`    | `0x19` | Pop and `or` logical operation two values in the stack and push the values to the stack  | | `stack <- stack:pop \|\| stack:pop` | |
 | `XOR`   | `0x1A` | Pop and `xor` logical operation two values in the stack and push the values to the stack | | `stack <- stack:pop ^ stack:pop` | |
 | `NOT`   | `0x1B` | Pop and `not` logical operation value in the stack and push the values to the stack | | `stack <- !stack:pop` | |
 | `LSF`   | `0x1C` | Pop and left shift values in the stack and push the values to the stack | | `stack <- stack:pop << stack:pop` | |
