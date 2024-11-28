@@ -24,7 +24,7 @@
 | `GTE`  | `0x23` | Pop and compare if the first value is greater than or equal to the second, and if true, push 1 to the stack | | `stack <- stack:pop >= stack:pop` |
 | `LTE`  | `0x24` | Pop and compare if the first value is less than or equal to the second, and if true, push 1 to the stack | | `stack <- stack:pop <= stack:pop` |
 | `PROC` | `0x28` | Specify the length of the procedure, skip this length and execute. this instruction is used later when it is executed through CALL | Length of the procedure | `ptr = ptr + operand + 1(PROC)` |
-| `CALL` | `0x29` | Backup the current pointer to the callstack and move it to the position of the procedure (PROC next pointer) | Pointer of the procedure's first instruction | `callstack <- ptr, ptr = operand` |
+| `CALL` | `0x29` | Backup the current pointer to the callstack and jump it to the pointer of the procedure (PROC) | Pointer of the procedure instruction | `callstack <- ptr, ptr = operand + 1` |
 | `RET` | `0x2A` | Return to the pointer backed up to callstack | | `ptr = callstack:pop` |
 | `JMP` | `0x2C` | Jump to the pointer | Pointer | `ptr = operand` |
 | `JIF` | `0x2D` | Pop the stack, and if the value is 0 (false), jump to the pointer | Pointer | `if (stack:pop == 0) ptr = operand` |
