@@ -36,7 +36,7 @@ OpExecuted Vm::executeOp(Op &op) {
         case Opcode::STORE: {
             auto value = this->stack.pop(this->ptr);
             auto addr = this->getOperand(op);
-            this->heap.insert(std::make_pair(addr, value));
+            this->heap.insert_or_assign(addr, value);
             break;
         }
         case Opcode::LOAD: {
@@ -215,6 +215,18 @@ void Vm::stackDump() {
 }
 
 void Vm::heapDump() {
+    std::cout << "----- dumping heap -----" << std::endl;
+    for (const auto& pair : this->heap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+    std::cout << "------------------------" << std::endl;
+}
+
+void Vm::dump() {
+    std::cout << "----- dumping stack ptr=" << this->ptr << " -----" << std::endl;
+    for (auto i = 0; i < this->stack.values_.size(); i++) {
+        std::cout << i << ": " << stack.values_[i] << std::endl;
+    }
     std::cout << "----- dumping heap -----" << std::endl;
     for (const auto& pair : this->heap) {
         std::cout << pair.first << ": " << pair.second << std::endl;

@@ -28,6 +28,7 @@ public:
 
     void stackDump();
     void heapDump();
+    void dump();
     
 private:
     Pointer ptr;
