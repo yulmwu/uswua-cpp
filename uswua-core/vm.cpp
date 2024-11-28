@@ -48,6 +48,14 @@ OpExecuted Vm::executeOp(Op &op) {
             this->stack.push(value->second);
             break;
         }
+        case Opcode::SWAP: {
+            auto x = this->stack.pop(this->ptr);
+            auto y = this->stack.pop(this->ptr);
+            
+            this->stack.push(x);
+            this->stack.push(y);
+            break;
+        }
         case Opcode::ADD: {
             auto left = this->stack.pop(this->ptr);
             auto right = this->stack.pop(this->ptr);

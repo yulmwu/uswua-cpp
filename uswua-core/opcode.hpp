@@ -12,6 +12,7 @@ enum class Opcode : uint8_t {
     PUSH = 0x01,
     STORE = 0x02,
     LOAD = 0x03,
+    SWAP = 0x04,
 
     ADD = 0x10,
     SUB = 0x11,
