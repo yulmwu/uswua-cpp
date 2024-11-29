@@ -38,6 +38,7 @@
 		971D21782CBAB12700722147 /* tests_all.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests_all.cpp; sourceTree = "<group>"; };
 		971D21792CBAB16C00722147 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		978E1D1B2CC1D61600BE7B59 /* case_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_2.cpp; sourceTree = "<group>"; };
+		97A166802CF9579000EA875C /* case_parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_parser.cpp; sourceTree = "<group>"; };
 		97A9CC622C6E3723000DC5BF /* uswua-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "uswua-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97A9CC6C2C6E37CF000DC5BF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		97A9CC702C6E39F8000DC5BF /* opcode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = opcode.cpp; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 				978E1D1B2CC1D61600BE7B59 /* case_2.cpp */,
 				971ADCA42CF0017C00BA4EDB /* case_b2i.cpp */,
 				97D8F9F12CF7F0B800E9C942 /* case_sum.cpp */,
+				97A166802CF9579000EA875C /* case_parser.cpp */,
 			);
 			path = tests;
 			sourceTree = "<group>";
