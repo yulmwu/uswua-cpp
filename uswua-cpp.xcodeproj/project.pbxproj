@@ -14,6 +14,7 @@
 		97A9DB102C70C30100185295 /* stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0E2C70C30100185295 /* stack.cpp */; };
 		97A9DB132C70C4BA00185295 /* vm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB112C70C4BA00185295 /* vm.cpp */; };
 		97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C69E6D2CF6959500E7DFA5 /* time.cpp */; };
+		97EEBFDB2CF93CA1001FF479 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97EEBFD92CF93CA1001FF479 /* parser.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,8 @@
 		97C69E6D2CF6959500E7DFA5 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
 		97C69E6E2CF6959500E7DFA5 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
 		97D8F9F12CF7F0B800E9C942 /* case_sum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_sum.cpp; sourceTree = "<group>"; };
+		97EEBFD92CF93CA1001FF479 /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parser.cpp; sourceTree = "<group>"; };
+		97EEBFDA2CF93CA1001FF479 /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = parser.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				971ADCA22CEFF7D400BA4EDB /* b2i.hpp */,
 				97C69E6D2CF6959500E7DFA5 /* time.cpp */,
 				97C69E6E2CF6959500E7DFA5 /* time.hpp */,
+				97EEBFD92CF93CA1001FF479 /* parser.cpp */,
+				97EEBFDA2CF93CA1001FF479 /* parser.hpp */,
 			);
 			path = "uswua-utils";
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97EEBFDB2CF93CA1001FF479 /* parser.cpp in Sources */,
 				97A9DB132C70C4BA00185295 /* vm.cpp in Sources */,
 				97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */,
 				97A9DB102C70C30100185295 /* stack.cpp in Sources */,
