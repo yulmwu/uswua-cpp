@@ -10,24 +10,27 @@ using namespace std;
 
 TEST_CASE(case_parser) {
     auto code = R"(
-PUSH 0x00
+PUSH 0x00           ; r = 0
 STORE r
-PUSH 0x01
+PUSH 0x01           ; i = 0
 STORE i
-PROC 12
+
+PROC 12             ; def f():
     LOAD r
     LOAD i
     ADD
-    STORE r
+    STORE r         ; r = r + i
     LOAD i
     PUSH 0x01
     ADD
-    STORE i
+    STORE i         ; i = i + 1
     LOAD i
     PUSH 0x0A
-    GTE
-    JIF 18
+    GTE             ; cond = 10 >= i
+    JIF 18          ; if !cond { JIF 18 }
+
 JMP 5
+
 LOAD r
 LOAD i
 NOOP

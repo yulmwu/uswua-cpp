@@ -66,10 +66,10 @@ Opcode to_opcode(string opcode, Pointer pointer = 0) {
     throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, pointer);
 }
 
-Instructions Parser::parse() {
+Instructions Parser::parse() {;
     Instructions instructions;
     
-    for (auto line : split(this->content, '\n')) {
+    for (auto line : split(std::regex_replace(this->content, regex(R"(;.*)"), ""), '\n')) {
         auto trimmed = trim(line);
         
         if (trimmed.empty()) continue;
