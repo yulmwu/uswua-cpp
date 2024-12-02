@@ -11,27 +11,36 @@ using namespace std;
 TEST_CASE(case_parser) {
     auto code = R"(
 PUSH 0x00
-STORE A
+STORE r
 PUSH 0x01
-STORE B
+STORE i
 PROC 12
-LOAD A
-LOAD B
-ADD
-STORE A
-LOAD B
-PUSH 0x01
-ADD
-STORE B
-LOAD B
-PUSH 0x0A
-GTE
-JIF 18
+    LOAD r
+    LOAD i
+    ADD
+    STORE r
+    LOAD i
+    PUSH 0x01
+    ADD
+    STORE i
+    LOAD i
+    PUSH 0x0A
+    GTE
+    JIF 18
 JMP 5
-LOAD A
-LOAD B
+LOAD r
+LOAD i
 NOOP
 )";
+    
+    Parser p = Parser(code);
+    Instructions instructions_a = p.parse();
+    
+    auto label_r = p.get_or_insert("r");
+    auto label_i = p.get_or_insert("i");
+    
+    ASSERT_EQ(label_r, 0x00);
+    ASSERT_EQ(label_i, 0x01);
     
     std::vector<unsigned char> tests = {
         /* 00 */ 0x01, 0x00, // PUSH 0
@@ -61,9 +70,7 @@ NOOP
         /* 18 */ 0x00 // NOOP
     };
     
-    auto instructions_a = b2i_from(tests);
-    Parser p = Parser(code);
-    Instructions instructions_b = p.parse();
+    auto instructions_b = b2i_from(tests);
     
     for (auto i = 0; i < instructions_a.size(); i++) {
         ASSERT_EQ(instructions_a[i], instructions_b[i]);

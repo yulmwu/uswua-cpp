@@ -15,10 +15,11 @@ public:
 
     Instructions parse();
     Op parse_op(std::vector<std::string>);
+    Pointer get_or_insert(std::string);
 
 private:
     std::map<std::string, Pointer> heap_label_map;
-    Pointer heap_label_index ;
+    Pointer heap_label_index;
 };
 
 #endif /* parser_hpp */

@@ -96,16 +96,7 @@ Op Parser::parse_op(vector<string> op) {
     } else if (opcode == Opcode::STORE
                || opcode == Opcode::LOAD) {
         if (std::regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
-            auto value = this->heap_label_map.find(operand);
-
-            if (value != this->heap_label_map.end()) {
-                return Op(opcode, value->second);
-            } else {
-                this->heap_label_map.insert(std::make_pair(operand, this->heap_label_index));
-                auto r = this->heap_label_index;
-                this->heap_label_index++;
-                return Op(opcode, r);
-            }
+            return Op(opcode, this->get_or_insert(operand));
         }
         else if (operand.starts_with("0x")) {
             return Op(opcode, (Pointer)stoi(operand, 0, 16));
@@ -124,5 +115,18 @@ Op Parser::parse_op(vector<string> op) {
         }
     } else {
         return Op(opcode, nullopt);
+    }
+}
+
+Pointer Parser::get_or_insert(string operand) {
+    auto value = this->heap_label_map.find(operand);
+
+    if (value != this->heap_label_map.end()) {
+        return value->second;
+    } else {
+        this->heap_label_map.insert(std::make_pair(operand, this->heap_label_index));
+        auto r = this->heap_label_index;
+        this->heap_label_index++;
+        return r;
     }
 }
