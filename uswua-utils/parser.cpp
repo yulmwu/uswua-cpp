@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <regex>
 
 #include "../uswua-core/opcode.hpp"
 #include "../uswua-core/error.hpp"
@@ -93,8 +94,25 @@ Op Parser::parse_op(vector<string> op) {
             return Op(opcode, (Value)stoi(operand));
         }
     } else if (opcode == Opcode::STORE
-               || opcode == Opcode::LOAD 
-               || opcode == Opcode::JMP
+               || opcode == Opcode::LOAD) {
+        if (std::regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
+            auto value = this->heap_label_map.find(operand);
+
+            if (value != this->heap_label_map.end()) {
+                return Op(opcode, value->second);
+            } else {
+                this->heap_label_map.insert(std::make_pair(operand, this->heap_label_index));
+                auto r = this->heap_label_index;
+                this->heap_label_index++;
+                return Op(opcode, r);
+            }
+        }
+        else if (operand.starts_with("0x")) {
+            return Op(opcode, (Pointer)stoi(operand, 0, 16));
+        } else {
+            return Op(opcode, (Pointer)stoi(operand));
+        }
+    } else if (opcode == Opcode::JMP
                || opcode == Opcode::JIF
                || opcode == Opcode::DBG
                || opcode == Opcode::PROC
