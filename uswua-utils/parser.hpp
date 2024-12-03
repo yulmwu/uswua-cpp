@@ -14,8 +14,10 @@ public:
     Parser(std::string content) : content(content), heap_label_index(0) {}
 
     Instructions parse();
-    Op parse_op(std::vector<std::string>);
-    Pointer get_or_insert(std::string);
+    std::optional<Op> parse_op(std::vector<std::string>);
+    void preprocessing(std::string, std::vector<std::string>);
+    
+    Pointer heap_get_or_insert(std::string);
 
 private:
     std::map<std::string, Pointer> heap_label_map;

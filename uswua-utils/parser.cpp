@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <regex>
+#include <ranges>
 
 #include "../uswua-core/opcode.hpp"
 #include "../uswua-core/error.hpp"
@@ -74,15 +75,24 @@ Instructions Parser::parse() {;
         
         if (trimmed.empty()) continue;
 
-        instructions.push_back(this->parse_op(split(trimmed, ' ')));
+        auto result = this->parse_op(split(trimmed, ' '));
+        if (!result) continue;
+        
+        instructions.push_back(result.value());
     }
     
     return instructions;
 }
 
-Op Parser::parse_op(vector<string> op) {
+optional<Op> Parser::parse_op(vector<string> op) {
     auto _opcode = op[0];
     transform(_opcode.begin(), _opcode.end(), _opcode.begin(), ::tolower);
+    
+    if (_opcode.starts_with("#")) {
+        _opcode.erase(0, 1);
+        this->preprocessing(_opcode, vector(op.begin() + 1, op.end()));
+        return nullopt;
+    }
     
     auto opcode = to_opcode(_opcode);
     auto operand = op[1];
@@ -96,7 +106,7 @@ Op Parser::parse_op(vector<string> op) {
     } else if (opcode == Opcode::STORE
                || opcode == Opcode::LOAD) {
         if (std::regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
-            return Op(opcode, this->get_or_insert(operand));
+            return Op(opcode, this->heap_get_or_insert(operand));
         }
         else if (operand.starts_with("0x")) {
             return Op(opcode, (Pointer)stoi(operand, 0, 16));
@@ -118,7 +128,11 @@ Op Parser::parse_op(vector<string> op) {
     }
 }
 
-Pointer Parser::get_or_insert(string operand) {
+void Parser::preprocessing(string name, vector<string> args) {
+    cout << name << ": " << args[0] << args[1] << endl;
+}
+
+Pointer Parser::heap_get_or_insert(string operand) {
     auto value = this->heap_label_map.find(operand);
 
     if (value != this->heap_label_map.end()) {
