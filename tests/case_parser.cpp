@@ -10,6 +10,8 @@ using namespace std;
 
 TEST_CASE(case_parser) {
     auto code = R"(
+#DEFINE A 0x00
+
 PUSH 0x00           ; r = 0
 STORE r
 PUSH 0x01           ; i = 0
@@ -39,8 +41,8 @@ NOOP
     Parser p = Parser(code);
     Instructions instructions_a = p.parse();
     
-    auto label_r = p.get_or_insert("r");
-    auto label_i = p.get_or_insert("i");
+    auto label_r = p.heap_get_or_insert("r");
+    auto label_i = p.heap_get_or_insert("i");
     
     ASSERT_EQ(label_r, 0x00);
     ASSERT_EQ(label_i, 0x01);
@@ -75,7 +77,7 @@ NOOP
     
     auto instructions_b = b2i_from(tests);
     
-    for (auto i = 0; i < instructions_a.size(); i++) {
+    for (auto i = 0; i < instructions_b.size(); i++) {
         ASSERT_EQ(instructions_a[i], instructions_b[i]);
 //        cout << instructions_a[i] << " | " << instructions_b[i] << endl;
     }
