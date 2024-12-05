@@ -18,14 +18,6 @@ void Vm::execute() {
     }
 }
 
-Value Vm::getOperand(Op& op) {
-    if (op.operand.has_value()) {
-        return op.operand.value();
-    } else {
-        throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyOperand, this->ptr);
-    }
-}
-
 OpExecuted Vm::executeOp(Op &op) {
     switch (op.opcode) {
         case Opcode::NOOP: break;
@@ -199,6 +191,10 @@ OpExecuted Vm::executeOp(Op &op) {
             
             break;
         }
+        case Opcode::VMCALL: {
+            this->stack.push(this->vmcall(this->getOperand(op)));
+            break;
+        }
         case Opcode::DBG: {
             std::cout << std::endl;
             std::cout << "[" << current_time() << "] ";
@@ -212,6 +208,37 @@ OpExecuted Vm::executeOp(Op &op) {
     }
 
     return OpExecuted::OK;
+}
+
+Value Vm::vmcall(Pointer callno) {
+    auto args_len = this->stack.pop(this->ptr);
+
+    switch (callno) {
+        // print(args_len, ...args)
+        case 0x00: {
+            for (int i = 0; i < args_len; i++) std::cout << stack.pop(this->ptr) << " ";
+            break;
+        }
+        // println(args_len, ...args)
+        case 0x01: {
+            for (int i = 0; i < args_len; i++) std::cout << stack.pop(this->ptr) << " ";
+            std::cout << std::endl;
+            break;
+        }
+        default: {
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::UnknownCallNo, this->ptr);
+        }
+    }
+    
+    return 0;
+}
+
+Value Vm::getOperand(Op& op) {
+    if (op.operand.has_value()) {
+        return op.operand.value();
+    } else {
+        throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyOperand, this->ptr);
+    }
 }
 
 void Vm::stackDump() {
