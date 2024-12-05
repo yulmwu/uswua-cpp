@@ -17,6 +17,7 @@ Instructions b2i_from(std::vector<unsigned char> bytes) {
             case CALL:
             case JMP:
             case JIF:
+            case VMCALL:
             case DBG: {
                 instructions.push_back(Op(opcode, (Value)bytes[index + 1]));
                 index += 1;

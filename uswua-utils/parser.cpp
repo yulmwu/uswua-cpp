@@ -117,7 +117,8 @@ optional<Op> Parser::parse_op(vector<string> op) {
                || opcode == Opcode::JIF
                || opcode == Opcode::DBG
                || opcode == Opcode::PROC
-               || opcode == Opcode::CALL) {
+               || opcode == Opcode::CALL
+               || opcode == Opcode::VMCALL) {
         if (operand.starts_with("0x")) {
             return Op(opcode, (Pointer)stoi(operand, 0, 16));
         } else {
