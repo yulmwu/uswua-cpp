@@ -27,12 +27,12 @@ OpExecuted Vm::executeOp(Op &op) {
         }
         case Opcode::STORE: {
             auto value = this->stack.pop(this->ptr);
-            auto addr = this->getOperand(op);
+            auto addr = (Pointer)this->getOperand(op);
             this->heap.insert_or_assign(addr, value);
             break;
         }
         case Opcode::LOAD: {
-            auto addr = this->getOperand(op);
+            auto addr = (Pointer)this->getOperand(op);
             auto value = this->heap.find(addr);
             if (value == this->heap.end()) {
                 throw BytecodeError(BytecodeError::BytecodeErrorKind::NotFound, this->ptr);
@@ -46,6 +46,14 @@ OpExecuted Vm::executeOp(Op &op) {
             
             this->stack.push(x);
             this->stack.push(y);
+            break;
+        }
+        case Opcode::POP: {
+            this->stack.pop(this->ptr);
+            break;
+        }
+        case Opcode::DEL: {
+            this->heap.erase((Pointer)this->getOperand(op));
             break;
         }
         case Opcode::ADD: {
