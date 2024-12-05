@@ -15,6 +15,8 @@ const char* BytecodeError::what() const noexcept {
             return "NotFound";
         case BytecodeErrorKind::EmptyCallStack:
             return "EmptyCallStack";
+        case BytecodeErrorKind::UnknownCallNo:
+            return "UnknownCallNo";
     }
 }
 
