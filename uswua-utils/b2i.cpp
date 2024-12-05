@@ -13,6 +13,7 @@ Instructions b2i_from(std::vector<unsigned char> bytes) {
             case PUSH:
             case STORE:
             case LOAD:
+            case DEL:
             case PROC:
             case CALL:
             case JMP:
