@@ -40,6 +40,8 @@ Opcode to_opcode(string opcode, Pointer pointer = 0) {
     CASE_OPCODE("store", STORE)
     CASE_OPCODE("load", LOAD)
     CASE_OPCODE("swap", SWAP)
+    CASE_OPCODE("pop", POP)
+    CASE_OPCODE("del", DEL)
     CASE_OPCODE("add", ADD)
     CASE_OPCODE("sub", SUB)
     CASE_OPCODE("mul", MUL)
@@ -61,6 +63,7 @@ Opcode to_opcode(string opcode, Pointer pointer = 0) {
     CASE_OPCODE("ret", RET)
     CASE_OPCODE("jmp", JMP)
     CASE_OPCODE("jif", JIF)
+    CASE_OPCODE("vmcall", VMCALL)
     CASE_OPCODE("dbg", DBG)
     CASE_OPCODE("exit", EXIT)
 
@@ -104,7 +107,8 @@ optional<Op> Parser::parse_op(vector<string> op) {
             return Op(opcode, (Value)stoi(operand));
         }
     } else if (opcode == Opcode::STORE
-               || opcode == Opcode::LOAD) {
+               || opcode == Opcode::LOAD
+               || opcode == Opcode::DEL) {
         if (std::regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
             return Op(opcode, this->heap_get_or_insert(operand));
         }
