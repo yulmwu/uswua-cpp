@@ -39,6 +39,8 @@ enum class Opcode : uint8_t {
 
     JMP = 0x2C,
     JIF = 0x2D,
+    
+    VMCALL = 0x30,
 
     DBG = 0xFE,
     EXIT = 0xFF
