@@ -18,6 +18,8 @@ Opcode to_opcode(uint8_t value, Pointer ptr) {
         case 0x02: return Opcode::STORE;
         case 0x03: return Opcode::LOAD;
         case 0x04: return Opcode::SWAP;
+        case 0x05: return Opcode::POP;
+        case 0x06: return Opcode::DEL;
         case 0x10: return Opcode::ADD;
         case 0x11: return Opcode::SUB;
         case 0x12: return Opcode::MUL;

@@ -40,10 +40,13 @@ int main() {
 //        /* 17 */ 0x2C, 0x05, // JMP 5
 //
 //        /* 18 */ 0x03, 0x00, // LOAD 0
+//        /* 19 */ 0x03, 0x01, // LOAD 0
+//        
+//
 //        0x01, 1, // PUSH 1
 //        0x30, 0x01, // VMCALL 0x01(=print)
-//        
-//        /* 19 */ 0x03, 0x01, // LOAD 0
+//        0x05,
+//    
 //        0x01, 1, // PUSH 1
 //        0x30, 0x01, // VMCALL 0x01(=print)
 //        
@@ -55,8 +58,6 @@ int main() {
 //    Stack stack;
 //    Vm vm = Vm(instructions, stack);
 //    vm.execute();
-//
-//    vm.stackDump();
     
     return 0;
 }

@@ -13,6 +13,8 @@ enum class Opcode : uint8_t {
     STORE = 0x02,
     LOAD = 0x03,
     SWAP = 0x04,
+    POP = 0x05,
+    DEL = 0x06,
 
     ADD = 0x10,
     SUB = 0x11,
