@@ -30,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9713DB092D015BB400906A75 /* sum */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = sum; sourceTree = "<group>"; };
 		971ADCA12CEFF7D400BA4EDB /* b2i.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2i.cpp; sourceTree = "<group>"; };
 		971ADCA22CEFF7D400BA4EDB /* b2i.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = b2i.hpp; sourceTree = "<group>"; };
 		971ADCA42CF0017C00BA4EDB /* case_b2i.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_b2i.cpp; sourceTree = "<group>"; };
@@ -69,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9713DB082D015B8A00906A75 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				9713DB092D015BB400906A75 /* sum */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
 		971ADCA02CEFF55200BA4EDB /* uswua-utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +115,7 @@
 				97A9CC642C6E3723000DC5BF /* uswua-core */,
 				971ADCA02CEFF55200BA4EDB /* uswua-utils */,
 				971D21752CBAAF0B00722147 /* tests */,
+				9713DB082D015B8A00906A75 /* examples */,
 				97A9CC632C6E3723000DC5BF /* Products */,
 			);
 			sourceTree = "<group>";

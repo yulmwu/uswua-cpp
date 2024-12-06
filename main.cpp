@@ -14,50 +14,57 @@
 using namespace std;
 
 int main() {
-    TESTS_RUN_ALL();
+//    TESTS_RUN_ALL();
     
-//    std::vector<unsigned char> tests = {
-//        /* 00 */ 0x01, 0x00, // PUSH 0
-//        /* 01 */ 0x02, 0x00, // STORE 0 (r)   r = 0
-//        /* 02 */ 0x01, 0x01, // PUSH 1
-//        /* 03 */ 0x02, 0x01, // STORE 1 (i)   i = 1
-//        
-//        /* 04 */ 0x28, 0x0C, // PROC 12       def f():
-//        /* 05 */ 0x03, 0x00, // LOAD 0 (r)
-//        /* 06 */ 0x03, 0x01, // LOAD 1 (i)
-//        /* 07 */ 0x10, // ADD
-//        /* 08 */ 0x02, 0x00, // STORE 0 (r)       r = r + i
-//
-//        /* 09 */ 0x03, 0x01, // LOAD 1 (i)
-//        /* 10 */ 0x01, 0x01, // PUSH 1
-//        /* 11 */ 0x10, // ADD
-//        /* 12 */ 0x02, 0x01, // STORE 1           i = i + 1
-//        /* 13 */ 0x03, 0x01, // LOAD 1
-//        /* 14 */ 0x01, 0x0A, // PUSH 10
-//        /* 15 */ 0x23, // GTE (>=)                if (10 >= i) { JMP 5 } else { JIF 18 }
-//        /* 16 */ 0x2D, 0x12, // JIF 18,
-//
-//        /* 17 */ 0x2C, 0x05, // JMP 5
-//
-//        /* 18 */ 0x03, 0x00, // LOAD 0
-//        /* 19 */ 0x03, 0x01, // LOAD 0
-//        
-//
-//        0x01, 1, // PUSH 1
-//        0x30, 0x01, // VMCALL 0x01(=print)
-//        0x05,
-//    
-//        0x01, 1, // PUSH 1
-//        0x30, 0x01, // VMCALL 0x01(=print)
-//        
-//        /* 18 */ 0x00 // NOOP
-//    };
-//    
-//    auto instructions = b2i_from(tests);
-//    
-//    Stack stack;
-//    Vm vm = Vm(instructions, stack);
-//    vm.execute();
+    auto code = R"(
+/* 00 */   PUSH 0x00           ; r = 0
+/* 01 */   STORE r             ;
+/* 02 */   PUSH 0x01           ; i = 1
+/* 03 */   STORE i             ;
+                               ;
+/* 04 */   PROC 14             ; def f():
+/* 05 */       LOAD r          ;
+/* 06 */       LOAD i          ;
+/* 07 */       ADD             ;
+/* 08 */       STORE r         ;     r = r + i
+/* 09 */       LOAD i          ;
+/* 10 */       PUSH 0x01       ;
+/* 11 */       ADD             ;
+/* 12 */       STORE i         ;     i = i + 1
+/* 13 */       LOAD i          ;
+/* 14 */       PUSH 0x0A       ;
+/* 15 */       GTE             ;
+/* 16 */       JIF [+2]        ;    if 10 >= i:
+/* 17 */       CALL 4          ;        f()
+/* 18 */       RET             ;    else:
+                               ;        return
+/* 19 */   CALL 4              ; f()
+                               ;
+/* 20 */   LOAD r              ;
+/* 21 */   PUSH 1              ;
+/* 22 */   VMCALL 0x01         ; println(r)
+/* 22 */   POP                 ;
+                               ;
+/* 23 */   LOAD i              ;
+/* 24 */   PUSH 1              ;
+/* 25 */   VMCALL 0x01         ; println(i)
+/* 26 */   POP
+)";
+    
+    Parser p = Parser(code);
+    Instructions instructions = p.parse();
+    
+    Stack stack;
+    Vm vm = Vm(instructions, stack);
+    
+    try {
+        vm.execute();
+    } catch (BytecodeError error) {
+        cout << error.what() << endl;
+        cout << error.where() << endl;
+    }
+    
+    vm.stackDump();
     
     return 0;
 }
