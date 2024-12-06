@@ -9,11 +9,15 @@ void Vm::execute() {
     while (instructions.size() > ptr)
     {
         auto result = executeOp(instructions[ptr]);
+        
+        std::cout << instructions[ptr] << std::endl;
+        
         if (result == OpExecuted::CONTINUE) {
             continue;
         } else if (result == OpExecuted::BREAK) {
             break;
         }
+        
         this->ptr++;
     }
 }

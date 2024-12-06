@@ -32,7 +32,7 @@ string trim(string str) {
     return str;
 }
 
-Opcode to_opcode(string opcode, Pointer pointer = 0) {
+Opcode to_opcode(string opcode, Pointer pointer) {
     transform(opcode.begin(), opcode.end(), opcode.begin(), ::tolower);
     
     CASE_OPCODE("noop", NOOP)
@@ -101,7 +101,7 @@ optional<Op> Parser::parse_op(vector<string> op) {
         return nullopt;
     }
     
-    auto opcode = to_opcode(_opcode);
+    auto opcode = to_opcode(_opcode, this->pointer);
     auto operand = op[1];
     
     if (opcode == Opcode::PUSH) {
@@ -141,7 +141,10 @@ optional<Op> Parser::parse_op(vector<string> op) {
 }
 
 void Parser::preprocessing(string name, vector<string> args) {
-    cout << name << ": " << args[0] << args[1] << endl;
+//    cout << name << ": " << args[0] << args[1] << endl;
+    if (name == "startptr") {
+        this->pointer = (Pointer)stoi(args[0]);
+    }
 }
 
 Pointer Parser::heap_get_or_insert(string operand) {
