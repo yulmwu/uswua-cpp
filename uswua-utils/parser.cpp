@@ -73,7 +73,10 @@ Opcode to_opcode(string opcode, Pointer pointer = 0) {
 Instructions Parser::parse() {;
     Instructions instructions;
     
-    for (auto line : split(std::regex_replace(this->content, regex(R"(;.*)"), ""), '\n')) {
+    auto r = std::regex_replace(this->content, regex(";.*", ""), "");
+    r = std::regex_replace(r, regex("/\\*.*?\\*/"), "");
+    
+    for (auto line : split(r, '\n')) {
         auto trimmed = trim(line);
         
         if (trimmed.empty()) continue;
@@ -82,6 +85,7 @@ Instructions Parser::parse() {;
         if (!result) continue;
         
         instructions.push_back(result.value());
+        this->pointer++;
     }
     
     return instructions;
@@ -125,6 +129,9 @@ optional<Op> Parser::parse_op(vector<string> op) {
                || opcode == Opcode::VMCALL) {
         if (operand.starts_with("0x")) {
             return Op(opcode, (Pointer)stoi(operand, 0, 16));
+        } else if (operand.starts_with("[") && operand.ends_with("]")) {
+            string r = operand.substr(1, operand.length() - 2);
+            return Op(opcode, (Pointer)(this->pointer + stoi(r)));
         } else {
             return Op(opcode, (Pointer)stoi(operand));
         }
