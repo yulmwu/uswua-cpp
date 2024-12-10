@@ -10,7 +10,7 @@ void Vm::execute() {
     {
         auto result = executeOp(instructions[ptr]);
         
-        std::cout << instructions[ptr] << std::endl;
+//        std::cout << instructions[ptr] << std::endl;
         
         if (result == OpExecuted::CONTINUE) {
             continue;

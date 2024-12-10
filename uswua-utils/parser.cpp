@@ -79,7 +79,7 @@ Instructions Parser::parse() {;
     for (auto line : split(r, '\n')) {
         auto trimmed = trim(line);
         
-        if (trimmed.empty()) continue;
+        if (trimmed.empty() || trimmed.starts_with(';')) continue;
 
         auto result = this->parse_op(split(trimmed, ' '));
         if (!result) continue;
