@@ -13,6 +13,7 @@
 		97A9DB0D2C70C01400185295 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0B2C70C01400185295 /* error.cpp */; };
 		97A9DB102C70C30100185295 /* stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0E2C70C30100185295 /* stack.cpp */; };
 		97A9DB132C70C4BA00185295 /* vm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB112C70C4BA00185295 /* vm.cpp */; };
+		97C1DEC72D0A4FB00026EF9C /* heap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1DEC52D0A4FB00026EF9C /* heap.cpp */; };
 		97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C69E6D2CF6959500E7DFA5 /* time.cpp */; };
 		97EEBFDB2CF93CA1001FF479 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97EEBFD92CF93CA1001FF479 /* parser.cpp */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,8 @@
 		97A9DB112C70C4BA00185295 /* vm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vm.cpp; sourceTree = "<group>"; };
 		97A9DB122C70C4BA00185295 /* vm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vm.hpp; sourceTree = "<group>"; };
 		97A9DB142C70CC6600185295 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		97C1DEC52D0A4FB00026EF9C /* heap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = heap.cpp; sourceTree = "<group>"; };
+		97C1DEC62D0A4FB00026EF9C /* heap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = heap.hpp; sourceTree = "<group>"; };
 		97C69E6D2CF6959500E7DFA5 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
 		97C69E6E2CF6959500E7DFA5 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
 		97D8F9F12CF7F0B800E9C942 /* case_sum.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_sum.cpp; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				97A9DB0C2C70C01400185295 /* error.hpp */,
 				97A9DB0E2C70C30100185295 /* stack.cpp */,
 				97A9DB0F2C70C30100185295 /* stack.hpp */,
+				97C1DEC52D0A4FB00026EF9C /* heap.cpp */,
+				97C1DEC62D0A4FB00026EF9C /* heap.hpp */,
 			);
 			path = "uswua-core";
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			files = (
 				97EEBFDB2CF93CA1001FF479 /* parser.cpp in Sources */,
 				97A9DB132C70C4BA00185295 /* vm.cpp in Sources */,
+				97C1DEC72D0A4FB00026EF9C /* heap.cpp in Sources */,
 				97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */,
 				97A9DB102C70C30100185295 /* stack.cpp in Sources */,
 				97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */,
