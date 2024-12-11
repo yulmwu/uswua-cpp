@@ -6,6 +6,7 @@
 
 #include "opcode.hpp"
 #include "stack.hpp"
+#include "heap.hpp"
 #include "error.hpp"
 
 enum class OpExecuted {
@@ -17,11 +18,12 @@ enum class OpExecuted {
 class Vm {
 public:
     Instructions instructions;
-    
-    Vm(Instructions instructions)
-        : instructions(instructions), stack(*(new Stack())), heap(), ptr(0) {}
-    Vm(Instructions instructions, Stack& stack)
-        : instructions(instructions), stack(stack), heap(), ptr(0) {}
+
+    Stack& stack;
+    Heap& heap;
+
+    Vm(Instructions instructions, Stack& stack, Heap& heap)
+        : instructions(instructions), stack(stack), heap(heap), ptr(0) {}
 
     void execute();
     OpExecuted executeOp(Op& op);
@@ -34,8 +36,6 @@ public:
     
 private:
     Pointer ptr;
-    Stack& stack;
-    std::map<Pointer, Value> heap;
     std::vector<Pointer> callStack;
 };
 

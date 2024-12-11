@@ -37,11 +37,8 @@ OpExecuted Vm::executeOp(Op &op) {
         }
         case Opcode::LOAD: {
             auto addr = (Pointer)this->getOperand(op);
-            auto value = this->heap.find(addr);
-            if (value == this->heap.end()) {
-                throw BytecodeError(BytecodeError::BytecodeErrorKind::NotFound, this->ptr);
-            }
-            this->stack.push(value->second);
+            auto value = this->heap.get(addr, this->ptr);
+            this->stack.push(value);
             break;
         }
         case Opcode::SWAP: {
@@ -57,7 +54,8 @@ OpExecuted Vm::executeOp(Op &op) {
             break;
         }
         case Opcode::DEL: {
-            this->heap.erase((Pointer)this->getOperand(op));
+            auto addr = (Pointer)this->getOperand(op);
+            this->heap.erase(addr, this->ptr);
             break;
         }
         case Opcode::ADD: {
@@ -255,15 +253,15 @@ Value Vm::getOperand(Op& op) {
 
 void Vm::stackDump() {
     std::cout << "----- dumping stack -----" << std::endl;
-    for (auto i = 0; i < this->stack.values_.size(); i++) {
-        std::cout << i << ": " << stack.values_[i] << std::endl;
+    for (auto i = 0; i < this->stack.data.size(); i++) {
+        std::cout << i << ": " << stack.data[i] << std::endl;
     }
     std::cout << "-------------------------" << std::endl;
 }
 
 void Vm::heapDump() {
     std::cout << "----- dumping heap -----" << std::endl;
-    for (const auto& pair : this->heap) {
+    for (const auto& pair : this->heap.data) {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
     std::cout << "------------------------" << std::endl;
@@ -271,11 +269,11 @@ void Vm::heapDump() {
 
 void Vm::dump() {
     std::cout << "----- dumping stack ptr=" << this->ptr << " -----" << std::endl;
-    for (auto i = 0; i < this->stack.values_.size(); i++) {
-        std::cout << i << ": " << stack.values_[i] << std::endl;
+    for (auto i = 0; i < this->stack.data.size(); i++) {
+        std::cout << i << ": " << stack.data[i] << std::endl;
     }
     std::cout << "----- dumping heap -----" << std::endl;
-    for (const auto& pair : this->heap) {
+    for (const auto& pair : this->heap.data) {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
     std::cout << "------------------------" << std::endl;
