@@ -40,9 +40,10 @@ TEST_CASE(case_sum) {
     auto instructions = b2i_from(tests);
     
     Stack stack;
-    Vm vm = Vm(instructions, stack);
+    Heap heap;
+    Vm vm = Vm(instructions, stack, heap);
     vm.execute();
 
-    ASSERT_EQ(stack.values_[0], 55);
-    ASSERT_EQ(stack.values_[1], 11);
+    ASSERT_EQ(stack.data[0], 55);
+    ASSERT_EQ(stack.data[1], 11);
 }

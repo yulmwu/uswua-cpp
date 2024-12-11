@@ -17,10 +17,11 @@ TEST_CASE(case_2) {
     };
     
     Stack stack;
-    Vm vm = Vm(tests, stack);
+    Heap heap;
+    Vm vm = Vm(tests, stack, heap);
     vm.execute();
     vm.stackDump();
 
-    ASSERT_EQ(stack.values_[0], 20);
-    ASSERT_EQ(stack.values_[1], 10);
+    ASSERT_EQ(stack.data[0], 20);
+    ASSERT_EQ(stack.data[1], 10);
 }

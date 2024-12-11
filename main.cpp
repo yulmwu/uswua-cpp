@@ -53,7 +53,8 @@ int main() {
         Instructions instructions = p.parse();
         
         Stack stack;
-        Vm vm = Vm(instructions, stack);
+        Heap heap;
+        Vm vm = Vm(instructions, stack, heap);
     
         vm.execute();
         
