@@ -6,7 +6,7 @@
 
 class Stack {
 public:
-    std::vector<Value> values_;
+    std::vector<Value> data;
 
     Value pop(Pointer ptr);
 
