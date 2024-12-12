@@ -293,12 +293,59 @@ std::string Vm::stackDump() {
     return ss.str();
 }
 
-void Vm::heapDump() {
-    std::cout << "----- dumping heap -----" << std::endl;
-    for (const auto& pair : this->heap.data) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
+std::string Vm::heapDump() {
+    std::stringstream ss;
+
+    if (this->heap.data.empty()) {
+        return "Heap is empty";
     }
-    std::cout << "------------------------" << std::endl;
+
+    Pointer min_address = this->heap.data.begin()->first;
+    Pointer max_address = this->heap.data.rbegin()->first;
+
+    min_address = (min_address / 16) * 16;
+    max_address = ((max_address + 15) / 16) * 16;
+
+    const size_t bytes_per_line = 16;
+
+    for (Pointer i = min_address; i < max_address; i += bytes_per_line) {
+        ss << std::setw(4) << std::setfill('0') << std::hex << i << ": ";
+
+        for (size_t j = 0; j < bytes_per_line; ++j) {
+            Pointer current_address = i + j;
+
+            if (this->heap.data.count(current_address)) {
+                ss << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(this->heap.data.at(current_address)) << " ";
+            } else {
+                ss << "00 ";
+            }
+
+            if (j == 7) {
+                ss << "  ";
+            }
+        }
+
+        ss << " -- ";
+
+        for (size_t j = 0; j < bytes_per_line; ++j) {
+            Pointer current_address = i + j;
+
+            if (this->heap.data.count(current_address)) {
+                unsigned char c = static_cast<unsigned char>(this->heap.data.at(current_address));
+                if (c >= 32 && c <= 126) {
+                    ss << c;
+                } else {
+                    ss << '.';
+                }
+            } else {
+                ss << '.';
+            }
+        }
+
+        ss << std::endl;
+    }
+
+    return ss.str();
 }
 
 void Vm::dump() {

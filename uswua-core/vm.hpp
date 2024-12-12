@@ -31,7 +31,7 @@ public:
     Value vmcall(Pointer);
 
     std::string stackDump();
-    void heapDump();
+    std::string heapDump();
     void dump();
     
 private:
