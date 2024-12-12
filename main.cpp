@@ -38,14 +38,7 @@ int main() {
 /* 18 */        RET             ;    else:
 /* 19 */    CALL 4              ; f()
 /* 20 */    LOAD r              ;
-/* 21 */    PUSH 1              ;
-/* 22 */    VMCALL 0x01         ; println(r)
-/* 22 */    POP                 ;
-/* 23 */    LOAD i              ;
-/* 24 */    PUSH 1              ;
-/* 25 */    VMCALL 0x01         ; println(i)
-/* 26 */    POP                 ;
-
+/* 21 */    LOAD i
 )";
     
     try {
@@ -58,7 +51,7 @@ int main() {
     
         vm.execute();
         
-        vm.stackDump();
+        cout << vm.stackDump() << endl;
     } catch (BytecodeError error) {
         cout << error.what() << endl;
         cout << error.where() << endl;

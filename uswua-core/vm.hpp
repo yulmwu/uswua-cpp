@@ -30,7 +30,7 @@ public:
     Value getOperand(Op& op);
     Value vmcall(Pointer);
 
-    void stackDump();
+    std::string stackDump();
     void heapDump();
     void dump();
     

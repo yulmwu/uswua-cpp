@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <ranges>
+#include <iomanip>
+#include <sstream>
 
 #include "vm.hpp"
 #include "../uswua-utils/time.hpp"
@@ -251,12 +253,44 @@ Value Vm::getOperand(Op& op) {
     }
 }
 
-void Vm::stackDump() {
-    std::cout << "----- dumping stack -----" << std::endl;
-    for (auto i = 0; i < this->stack.data.size(); i++) {
-        std::cout << i << ": " << stack.data[i] << std::endl;
+std::string Vm::stackDump() {
+    std::stringstream ss;
+    
+    std::vector<Value> arr = this->stack.data;
+    arr.resize(((arr.size() + 15) / 16) * 16, 0);
+    
+    const size_t bytes_per_line = 16;
+
+    for (size_t i = 0; i < arr.size(); i += bytes_per_line) {
+        ss << std::setw(4) << std::setfill('0') << std::hex << i << ": ";
+
+        for (size_t j = 0; j < bytes_per_line; ++j) {
+            ss << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(arr[i + j]) << " ";
+
+            if (j == 7) {
+                ss << "  ";
+            }
+        }
+
+        ss << " -- ";
+
+        for (size_t j = 0; j < bytes_per_line; ++j) {
+            if (i + j < arr.size()) {
+                unsigned char c = arr[i + j];
+                if (c >= 32 && c <= 126) {
+                    ss << c;
+                } else {
+                    ss << '.';
+                }
+            } else {
+                break;
+            }
+        }
+
+        ss << std::endl;
     }
-    std::cout << "-------------------------" << std::endl;
+    
+    return ss.str();
 }
 
 void Vm::heapDump() {
