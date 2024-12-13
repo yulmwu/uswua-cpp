@@ -71,7 +71,7 @@ Opcode to_opcode(string opcode, Pointer pointer) {
     throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, pointer);
 }
 
-Instructions Parser::parse() {;
+Instructions Parser::parse() {
     Instructions instructions;
     
     auto r = regex_replace(this->content, regex(";.*", ""), "");
@@ -113,53 +113,97 @@ optional<Op> Parser::parse_op(vector<string> op) {
     auto operand = op[1];
     
     if (opcode == Opcode::PUSH) {
-        if (operand.starts_with("0x")) {
-            return Op(opcode, (Value)stoi(operand, 0, 16));
-        } else {
-            return Op(opcode, (Value)stoi(operand));
-        }
-    } else if (opcode == Opcode::STORE
-               || opcode == Opcode::LOAD
-               || opcode == Opcode::DEL) {
-        if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
-            return Op(opcode, this->heap_get_or_insert(operand));
-        }
-        else if (operand.starts_with("0x")) {
-            return Op(opcode, (Pointer)stoi(operand, 0, 16));
-        } else {
-            return Op(opcode, (Pointer)stoi(operand));
-        }
+        return this->parse_op_push(opcode, operand);
+    } else if (opcode == Opcode::STORE || opcode == Opcode::LOAD || opcode == Opcode::DEL) {
+        return this->parse_op_heap_op(opcode, operand);
     } else if (opcode == Opcode::JMP || opcode == Opcode::JIF) {
-        if (operand.starts_with("0x")) {
-            return Op(opcode, (Pointer)stoi(operand, 0, 16));
-        } else if (operand.starts_with("[") && operand.ends_with("]")) {
-            string r = operand.substr(1, operand.length() - 2);
-            return Op(opcode, (Pointer)(this->pointer + stoi(r)));
-        } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
-            auto value = this->label_map.find(operand);
-    
-            if (value != this->label_map.end()) {
-                return Op(opcode, value->second);
-            } else {
-                throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer);
-            }
-        } else {
-            return Op(opcode, (Pointer)stoi(operand));
-        }
-    } else if (opcode == Opcode::DBG
-               || opcode == Opcode::PROC
-               || opcode == Opcode::CALL
-               || opcode == Opcode::VMCALL) {
-        if (operand.starts_with("0x")) {
-            return Op(opcode, (Pointer)stoi(operand, 0, 16));
-        } else if (operand.starts_with("[") && operand.ends_with("]")) {
-            string r = operand.substr(1, operand.length() - 2);
-            return Op(opcode, (Pointer)(this->pointer + stoi(r)));
-        } else {
-            return Op(opcode, (Pointer)stoi(operand));
-        }
+        return this->parse_op_jmp(opcode, operand);
+    } else if (opcode == Opcode::PROC) {
+        return this->parse_op_proc(opcode, operand);
+    } else if (opcode == Opcode::CALL) {
+        return this->parse_op_call(opcode, operand);
+    } else if (opcode == Opcode::DBG || opcode == Opcode::VMCALL) {
+        return this->parse_op_dbg(opcode, operand);
     } else {
         return Op(opcode, nullopt);
+    }
+}
+
+Op Parser::parse_op_push(Opcode opcode, string operand) {
+    if (operand.starts_with("0x")) {
+        return Op(opcode, (Value)stoi(operand, 0, 16));
+    } else {
+        return Op(opcode, (Value)stoi(operand));
+    }
+}
+
+Op Parser::parse_op_heap_op(Opcode opcode, string operand) {
+    if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
+        return Op(opcode, this->heap_get_or_insert(operand));
+    }
+    else if (operand.starts_with("0x")) {
+        return Op(opcode, (Pointer)stoi(operand, 0, 16));
+    } else {
+        return Op(opcode, (Pointer)stoi(operand));
+    }
+}
+
+Op Parser::parse_op_jmp(Opcode opcode, string operand) {
+    if (operand.starts_with("0x")) {
+        return Op(opcode, (Pointer)stoi(operand, 0, 16));
+    } else if (operand.starts_with("[") && operand.ends_with("]")) {
+        string r = operand.substr(1, operand.length() - 2);
+        return Op(opcode, (Pointer)(this->pointer + stoi(r)));
+    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
+        auto value = this->label_map.find(operand);
+
+        if (value != this->label_map.end()) {
+            return Op(opcode, value->second);
+        } else {
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer);
+        }
+    } else {
+        return Op(opcode, (Pointer)stoi(operand));
+    }
+}
+
+Op Parser::parse_op_proc(Opcode opcode, string operand) {
+    if (operand.starts_with("0x")) {
+        return Op(opcode, (Pointer)stoi(operand, 0, 16));
+    } else if (operand.starts_with("[") && operand.ends_with("]")) {
+        string r = operand.substr(1, operand.length() - 2);
+        return Op(opcode, (Pointer)(this->pointer + stoi(r)));
+        //    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
+        //
+        ////        this->proc_map.insert(operand, )
+        //    }
+    } else {
+        return Op(opcode, (Value)stoi(operand));
+    }
+}
+
+Op Parser::parse_op_call(Opcode opcode, string operand) {
+    if (operand.starts_with("0x")) {
+        return Op(opcode, (Pointer)stoi(operand, 0, 16));
+    } else if (operand.starts_with("[") && operand.ends_with("]")) {
+        string r = operand.substr(1, operand.length() - 2);
+        return Op(opcode, (Pointer)(this->pointer + stoi(r)));
+        //    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
+        //        // TODO
+        //    }
+    } else {
+        return Op(opcode, (Value)stoi(operand));
+    }
+}
+
+Op Parser::parse_op_dbg(Opcode opcode, string operand) {
+    if (operand.starts_with("0x")) {
+        return Op(opcode, (Pointer)stoi(operand, 0, 16));
+    } else if (operand.starts_with("[") && operand.ends_with("]")) {
+        string r = operand.substr(1, operand.length() - 2);
+        return Op(opcode, (Pointer)(this->pointer + stoi(r)));
+    } else {
+        return Op(opcode, (Pointer)stoi(operand));
     }
 }
 
@@ -174,7 +218,6 @@ bool Parser::preprocessing(vector<string> args) {
         }
     } else if (args[0].ends_with(":")) {
         args[0].pop_back();
-        cout << "label: " << this->pointer << ": " << args[0] << endl;
         this->label_map.insert_or_assign(args[0], this->pointer);
     } else {
         return false;
