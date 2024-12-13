@@ -6,17 +6,19 @@ BytecodeError::BytecodeError(BytecodeErrorKind kind, Pointer ptr)
 const char* BytecodeError::what() const noexcept {
     switch (this->kind_) {
         case BytecodeErrorKind::EmptyStack:
-            return "EmptyStack";
+            return "Empty Stack";
         case BytecodeErrorKind::InvalidOpcode:
-            return "InvalidOpcode";
+            return "Invalid Opcode";
         case BytecodeErrorKind::EmptyOperand:
-            return "EmptyOperand";
+            return "Empty Operand";
         case BytecodeErrorKind::NotFound:
-            return "NotFound";
+            return "Not Found";
         case BytecodeErrorKind::EmptyCallStack:
-            return "EmptyCallStack";
+            return "Empty CallStack";
         case BytecodeErrorKind::UnknownCallNo:
-            return "UnknownCallNo";
+            return "Unknown Call Number";
+        case BytecodeErrorKind::IdentifierNotFound:
+            return "Identifier Not Found";
     }
 }
 
