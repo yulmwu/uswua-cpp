@@ -8,11 +8,11 @@ class Stack {
 public:
     std::vector<Value> data;
 
-    Value pop(Pointer ptr);
-
     Stack() = default;
 
-    void push(Value value);
+    void push(Value);
+    Value pop(Pointer);
+    Value back(Pointer);
 };
 
 #endif /* stack_hpp */

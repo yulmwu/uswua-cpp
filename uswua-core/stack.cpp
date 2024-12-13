@@ -13,3 +13,10 @@ Value Stack::pop(Pointer ptr) {
     this->data.pop_back();
     return value;
 }
+
+Value Stack::back(Pointer ptr) {
+    if (this->data.empty()) {
+        throw BytecodeError(BytecodeError::BytecodeErrorKind::EmptyStack, ptr);
+    }
+    return this->data.back();
+}
