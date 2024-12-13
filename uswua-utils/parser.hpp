@@ -15,7 +15,7 @@ public:
 
     Instructions parse();
     std::optional<Op> parse_op(std::vector<std::string>);
-    void preprocessing(std::string, std::vector<std::string>);
+    bool preprocessing(std::vector<std::string>);
     
     Pointer heap_get_or_insert(std::string);
 
@@ -23,6 +23,7 @@ private:
     Pointer pointer;
     std::map<std::string, Pointer> heap_label_map;
     Pointer heap_label_index;
+    std::map<std::string, Pointer> label_map;
 };
 
 #endif /* parser_hpp */

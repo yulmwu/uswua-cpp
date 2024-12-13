@@ -74,19 +74,32 @@ Opcode to_opcode(string opcode, Pointer pointer) {
 Instructions Parser::parse() {;
     Instructions instructions;
     
-    auto r = std::regex_replace(this->content, regex(";.*", ""), "");
-    r = std::regex_replace(r, regex("/\\*.*?\\*/"), "");
+    auto r = regex_replace(this->content, regex(";.*", ""), "");
+    r = regex_replace(r, regex("/\\*.*?\\*/"), "");
     
+    vector<string> preprocessed;
+    
+    // preprocessing
     for (auto line : split(r, '\n')) {
         auto trimmed = trim(line);
-        
         if (trimmed.empty() || trimmed.starts_with(';')) continue;
 
-        auto result = this->parse_op(split(trimmed, ' '));
+        auto is_preprocess = this->preprocessing(split(trimmed, ' '));
+        
+        if (!is_preprocess) {
+            preprocessed.push_back(trimmed);
+            this->pointer++;
+        }
+    }
+    
+    this->pointer = 0;
+    
+    for (auto line : preprocessed) {
+        auto result = this->parse_op(split(line, ' '));
         if (!result) continue;
         
-        instructions.push_back(result.value());
         this->pointer++;
+        instructions.push_back(result.value());
     }
     
     return instructions;
@@ -95,12 +108,6 @@ Instructions Parser::parse() {;
 optional<Op> Parser::parse_op(vector<string> op) {
     auto _opcode = op[0];
     transform(_opcode.begin(), _opcode.end(), _opcode.begin(), ::tolower);
-    
-    if (_opcode.starts_with("#")) {
-        _opcode.erase(0, 1);
-        this->preprocessing(_opcode, vector(op.begin() + 1, op.end()));
-        return nullopt;
-    }
     
     auto opcode = to_opcode(_opcode, this->pointer);
     auto operand = op[1];
@@ -114,7 +121,7 @@ optional<Op> Parser::parse_op(vector<string> op) {
     } else if (opcode == Opcode::STORE
                || opcode == Opcode::LOAD
                || opcode == Opcode::DEL) {
-        if (std::regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
+        if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
             return Op(opcode, this->heap_get_or_insert(operand));
         }
         else if (operand.starts_with("0x")) {
@@ -122,9 +129,24 @@ optional<Op> Parser::parse_op(vector<string> op) {
         } else {
             return Op(opcode, (Pointer)stoi(operand));
         }
-    } else if (opcode == Opcode::JMP
-               || opcode == Opcode::JIF
-               || opcode == Opcode::DBG
+    } else if (opcode == Opcode::JMP || opcode == Opcode::JIF) {
+        if (operand.starts_with("0x")) {
+            return Op(opcode, (Pointer)stoi(operand, 0, 16));
+        } else if (operand.starts_with("[") && operand.ends_with("]")) {
+            string r = operand.substr(1, operand.length() - 2);
+            return Op(opcode, (Pointer)(this->pointer + stoi(r)));
+        } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
+            auto value = this->label_map.find(operand);
+    
+            if (value != this->label_map.end()) {
+                return Op(opcode, value->second);
+            } else {
+                throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer);
+            }
+        } else {
+            return Op(opcode, (Pointer)stoi(operand));
+        }
+    } else if (opcode == Opcode::DBG
                || opcode == Opcode::PROC
                || opcode == Opcode::CALL
                || opcode == Opcode::VMCALL) {
@@ -141,11 +163,24 @@ optional<Op> Parser::parse_op(vector<string> op) {
     }
 }
 
-void Parser::preprocessing(string name, vector<string> args) {
-//    cout << name << ": " << args[0] << args[1] << endl;
-    if (name == "startptr") {
-        this->pointer = (Pointer)stoi(args[0]);
+bool Parser::preprocessing(vector<string> args) {
+    if (args[0].starts_with("#")) {
+        args[0].erase(0, 1);
+        auto name = args[0];
+        auto arguments = vector(args.begin() + 1, args.end());
+
+        if (name == "startptr") {
+            this->pointer = (Pointer)stoi(arguments[0]);
+        }
+    } else if (args[0].ends_with(":")) {
+        args[0].pop_back();
+        cout << "label: " << this->pointer << ": " << args[0] << endl;
+        this->label_map.insert_or_assign(args[0], this->pointer);
+    } else {
+        return false;
     }
+
+    return true;
 }
 
 Pointer Parser::heap_get_or_insert(string operand) {
@@ -154,7 +189,7 @@ Pointer Parser::heap_get_or_insert(string operand) {
     if (value != this->heap_label_map.end()) {
         return value->second;
     } else {
-        this->heap_label_map.insert(std::make_pair(operand, this->heap_label_index));
+        this->heap_label_map.insert(make_pair(operand, this->heap_label_index));
         auto r = this->heap_label_index;
         this->heap_label_index++;
         return r;
