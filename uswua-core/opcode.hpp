@@ -15,6 +15,7 @@ enum class Opcode : uint8_t {
     SWAP = 0x04,
     POP = 0x05,
     DEL = 0x06,
+    DUP = 0x07,
 
     ADD = 0x10,
     SUB = 0x11,

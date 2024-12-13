@@ -51,7 +51,7 @@ LOAD i
         Vm vm = Vm(instructions, stack, heap);
     
         vm.execute();
-        
+
         cout << vm.stackDump() << endl;
         cout << "-----" << endl;
         cout << vm.heapDump() << endl;
