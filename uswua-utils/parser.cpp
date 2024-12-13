@@ -42,6 +42,7 @@ Opcode to_opcode(string opcode, Pointer pointer) {
     CASE_OPCODE("swap", SWAP)
     CASE_OPCODE("pop", POP)
     CASE_OPCODE("del", DEL)
+    CASE_OPCODE("dup", DUP)
     CASE_OPCODE("add", ADD)
     CASE_OPCODE("sub", SUB)
     CASE_OPCODE("mul", MUL)
