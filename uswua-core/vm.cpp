@@ -60,6 +60,11 @@ OpExecuted Vm::executeOp(Op &op) {
             this->heap.erase(addr, this->ptr);
             break;
         }
+        case Opcode::DUP: {
+            auto value = stack.back(this->ptr);
+            this->stack.push(value);
+            break;
+        }
         case Opcode::ADD: {
             auto left = this->stack.pop(this->ptr);
             auto right = this->stack.pop(this->ptr);
