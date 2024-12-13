@@ -11,7 +11,6 @@
 #define CASE_OPCODE(opcode_str, enum_value) \
     if (opcode == opcode_str) { return Opcode::enum_value; }
 
-
 using namespace std;
 
 vector<string> split(string str, char delimiter) {

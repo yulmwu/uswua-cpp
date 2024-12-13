@@ -1,5 +1,7 @@
 #include "error.hpp"
 
+using namespace std;
+
 BytecodeError::BytecodeError(BytecodeErrorKind kind, Pointer ptr)
     : kind_(kind), ptr(ptr) {}
 

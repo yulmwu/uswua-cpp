@@ -1,9 +1,11 @@
 #include "opcode.hpp"
 #include "error.hpp"
 
-Op::Op(Opcode op, std::optional<Value> val) : opcode(op), operand(val) {}
+using namespace std;
 
-void Op::display(std::ostream& os) const {
+Op::Op(Opcode op, optional<Value> val) : opcode(op), operand(val) {}
+
+void Op::display(ostream& os) const {
     os << opcode;
 
     if (this->operand.has_value()) {
@@ -48,13 +50,13 @@ Opcode to_opcode(uint8_t value, Pointer ptr) {
     }
 }
 
-std::ostream& operator<<(std::ostream& os, const Op& op) {
+ostream& operator<<(ostream& os, const Op& op) {
     op.display(os);
     return os;
 }
 
-std::ostream& operator<<(std::ostream& os, const Opcode& opcode) {
-    os << "0x" << std::hex << static_cast<int>(opcode);
+ostream& operator<<(ostream& os, const Opcode& opcode) {
+    os << "0x" << hex << static_cast<int>(opcode);
     return os;
 }
 

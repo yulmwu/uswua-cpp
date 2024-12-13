@@ -7,12 +7,14 @@
 #include "vm.hpp"
 #include "../uswua-utils/time.hpp"
 
+using namespace std;
+
 void Vm::execute() {
     while (instructions.size() > ptr)
     {
         auto result = executeOp(instructions[ptr]);
         
-//        std::cout << instructions[ptr] << std::endl;
+//        cout << instructions[ptr] << endl;
         
         if (result == OpExecuted::CONTINUE) {
             continue;
@@ -213,10 +215,10 @@ OpExecuted Vm::executeOp(Op &op) {
             break;
         }
         case Opcode::DBG: {
-            std::cout << std::endl;
-            std::cout << "[" << current_time() << "] ";
-            std::cout << "operand: " << op.operand.value();
-            std::cout << std::endl << std::endl;
+            cout << endl;
+            cout << "[" << current_time() << "] ";
+            cout << "operand: " << op.operand.value();
+            cout << endl << endl;
             break;
         }
         case Opcode::EXIT: {
@@ -233,13 +235,13 @@ Value Vm::vmcall(Pointer callno) {
     switch (callno) {
         // print(args_len, ...args)
         case 0x00: {
-            for (int i = 0; i < args_len; i++) std::cout << stack.pop(this->ptr) << " ";
+            for (int i = 0; i < args_len; i++) cout << stack.pop(this->ptr) << " ";
             break;
         }
         // println(args_len, ...args)
         case 0x01: {
-            for (int i = 0; i < args_len; i++) std::cout << stack.pop(this->ptr) << " ";
-            std::cout << std::endl;
+            for (int i = 0; i < args_len; i++) cout << stack.pop(this->ptr) << " ";
+            cout << endl;
             break;
         }
         default: {
@@ -258,19 +260,19 @@ Value Vm::getOperand(Op& op) {
     }
 }
 
-std::string Vm::stackDump() {
-    std::stringstream ss;
+string Vm::stackDump() {
+    stringstream ss;
     
-    std::vector<Value> arr = this->stack.data;
+    vector<Value> arr = this->stack.data;
     arr.resize(((arr.size() + 15) / 16) * 16, 0);
     
     const size_t bytes_per_line = 16;
 
     for (size_t i = 0; i < arr.size(); i += bytes_per_line) {
-        ss << std::setw(4) << std::setfill('0') << std::hex << i << ": ";
+        ss << setw(4) << setfill('0') << hex << i << ": ";
 
         for (size_t j = 0; j < bytes_per_line; ++j) {
-            ss << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(arr[i + j]) << " ";
+            ss << setw(2) << setfill('0') << hex << static_cast<int>(arr[i + j]) << " ";
 
             if (j == 7) {
                 ss << "  ";
@@ -292,14 +294,14 @@ std::string Vm::stackDump() {
             }
         }
 
-        ss << std::endl;
+        ss << endl;
     }
     
     return ss.str();
 }
 
-std::string Vm::heapDump() {
-    std::stringstream ss;
+string Vm::heapDump() {
+    stringstream ss;
 
     if (this->heap.data.empty()) {
         return "Heap is empty";
@@ -314,13 +316,13 @@ std::string Vm::heapDump() {
     const size_t bytes_per_line = 16;
 
     for (Pointer i = min_address; i < max_address; i += bytes_per_line) {
-        ss << std::setw(4) << std::setfill('0') << std::hex << i << ": ";
+        ss << setw(4) << setfill('0') << hex << i << ": ";
 
         for (size_t j = 0; j < bytes_per_line; ++j) {
             Pointer current_address = i + j;
 
             if (this->heap.data.count(current_address)) {
-                ss << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(this->heap.data.at(current_address)) << " ";
+                ss << setw(2) << setfill('0') << hex << static_cast<int>(this->heap.data.at(current_address)) << " ";
             } else {
                 ss << "00 ";
             }
@@ -347,20 +349,20 @@ std::string Vm::heapDump() {
             }
         }
 
-        ss << std::endl;
+        ss << endl;
     }
 
     return ss.str();
 }
 
 void Vm::dump() {
-    std::cout << "----- dumping stack ptr=" << this->ptr << " -----" << std::endl;
+    cout << "----- dumping stack ptr=" << this->ptr << " -----" << endl;
     for (auto i = 0; i < this->stack.data.size(); i++) {
-        std::cout << i << ": " << stack.data[i] << std::endl;
+        cout << i << ": " << stack.data[i] << endl;
     }
-    std::cout << "----- dumping heap -----" << std::endl;
+    cout << "----- dumping heap -----" << endl;
     for (const auto& pair : this->heap.data) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
+        cout << pair.first << ": " << pair.second << endl;
     }
-    std::cout << "------------------------" << std::endl;
+    cout << "------------------------" << endl;
 }

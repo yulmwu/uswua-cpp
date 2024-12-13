@@ -1,6 +1,8 @@
 #include "b2i.hpp"
 
-Instructions b2i_from(std::vector<unsigned char> bytes) {
+using namespace std;
+
+Instructions b2i_from(vector<unsigned char> bytes) {
     Instructions instructions;
     Pointer index = 0;
     
@@ -25,7 +27,7 @@ Instructions b2i_from(std::vector<unsigned char> bytes) {
                 break;
             }
             default: {
-                instructions.push_back(Op(opcode, std::nullopt));
+                instructions.push_back(Op(opcode, nullopt));
                 break;
             }
         }
