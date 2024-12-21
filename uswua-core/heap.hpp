@@ -5,8 +5,7 @@
 #include "opcode.hpp"
 #include "error.hpp"
 
-class Heap {
-public:
+struct Heap {
     std::map<Pointer, Value> data;
 
     void insert(Pointer, Value);
