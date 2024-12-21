@@ -17,6 +17,8 @@ int main() {
 //    TESTS_RUN_ALL();
     
     auto code = R"(
+#STARTPTR 0
+
 PUSH 0x00           ; r = 0
 STORE r             ;
 
@@ -55,10 +57,12 @@ LOAD i
         Parser p = Parser(code);
         Instructions instructions = p.parse();
         
+//        cout << p.vm_options.startPtr << endl;
+        
         Stack stack;
         Heap heap;
-        Vm vm = Vm(instructions, stack, heap);
-    
+        Vm vm = Vm(instructions, stack, heap, p.vm_options);
+
         vm.execute();
 
         cout << vm.stackDump() << endl;
