@@ -6,10 +6,12 @@
 #include <string>
 
 #include "../uswua-core/opcode.hpp"
+#include "../uswua-core/vm.hpp"
 
 class Parser {
 public:
     std::string content;
+    VmOptions vm_options;
     
     Parser(std::string content) : content(content), pointer(0), heap_label_index(0) {}
 

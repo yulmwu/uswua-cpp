@@ -210,10 +210,14 @@ bool Parser::preprocessing(vector<string> args) {
     if (args[0].starts_with("#")) {
         args[0].erase(0, 1);
         auto name = args[0];
+        transform(name.begin(), name.end(), name.begin(), ::tolower);
+
         auto arguments = vector(args.begin() + 1, args.end());
 
         if (name == "startptr") {
-            this->pointer = (Pointer)stoi(arguments[0]);
+            this->vm_options.startPtr = (Pointer)stoi(arguments[0]);
+        } else {
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::UnknownPreprocessor, pointer);
         }
     } else if (args[0].ends_with(":")) {
         args[0].pop_back();
