@@ -10,11 +10,10 @@
 using namespace std;
 
 void Vm::execute() {
-    while (instructions.size() > ptr)
-    {
-        auto result = executeOp(instructions[ptr]);
-        
-//        cout << instructions[ptr] << endl;
+    this->ptr = this->options.startPtr;
+    
+    while (this->instructions.size() > this->ptr) {
+        auto result = this->executeOp(this->instructions[this->ptr]);
         
         if (result == OpExecuted::CONTINUE) {
             continue;

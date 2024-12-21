@@ -15,15 +15,24 @@ enum class OpExecuted {
     BREAK
 };
 
+struct VmOptions {
+    Pointer startPtr = 0;
+};
+
 class Vm {
 public:
     Instructions instructions;
+    VmOptions options;
 
     Stack& stack;
     Heap& heap;
 
     Vm(Instructions instructions, Stack& stack, Heap& heap)
-        : instructions(instructions), stack(stack), heap(heap), ptr(0) {}
+        : instructions(instructions), stack(stack), heap(heap) {}
+    
+    Vm(Instructions instructions, Stack& stack, Heap& heap, VmOptions options)
+        : instructions(instructions), stack(stack), heap(heap), options(options) {}
+    
 
     void execute();
     OpExecuted executeOp(Op& op);
@@ -35,7 +44,7 @@ public:
     void dump();
     
 private:
-    Pointer ptr;
+    Pointer ptr = 0;
     std::vector<Pointer> callStack;
 };
 
