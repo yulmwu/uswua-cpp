@@ -21,6 +21,8 @@ const char* BytecodeError::what() const noexcept {
             return "Unknown Call Number";
         case BytecodeErrorKind::IdentifierNotFound:
             return "Identifier Not Found";
+        case BytecodeErrorKind::UnknownPreprocessor:
+            return "Unknown Preprocessor";
     }
 }
 

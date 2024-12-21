@@ -14,7 +14,8 @@ public:
         NotFound,
         EmptyCallStack,
         UnknownCallNo,
-        IdentifierNotFound
+        IdentifierNotFound,
+        UnknownPreprocessor
     };
 
     explicit BytecodeError(BytecodeErrorKind kind, Pointer ptr);
