@@ -4,8 +4,7 @@
 #include <vector>
 #include "opcode.hpp"
 
-class Stack {
-public:
+struct Stack {
     std::vector<Value> data;
 
     Stack() = default;
