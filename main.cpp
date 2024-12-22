@@ -25,7 +25,8 @@ STORE r             ;
 PUSH 0x01           ; i = 1
 STORE i             ;
 
-PROC 14             ; def f():
+#pstart F
+PROC F              ; def f():
     LOAD r          ;
     LOAD i          ;
     ADD             ;
@@ -46,8 +47,9 @@ _CASE_TRUE:
 
 _CASE_FALSE:
     RET             ;       else: return
+#pend F
 
-CALL 4              ; f()
+CALL D              ; f()
 
 LOAD r
 LOAD i
@@ -56,9 +58,7 @@ LOAD i
     try {
         Parser p = Parser(code);
         Instructions instructions = p.parse();
-        
-//        cout << p.vm_options.startPtr << endl;
-        
+
         Stack stack;
         Heap heap;
         Vm vm = Vm(instructions, stack, heap, p.vm_options);
@@ -69,8 +69,7 @@ LOAD i
         cout << "-----" << endl;
         cout << vm.heapDump() << endl;
     } catch (BytecodeError error) {
-        cout << error.what() << endl;
-        cout << error.where() << endl;
+        cout << error.what() << " at " << error.where() << endl;
     }
     
     return 0;
