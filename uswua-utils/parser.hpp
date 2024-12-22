@@ -35,6 +35,8 @@ private:
     std::map<std::string, Pointer> heap_label_map;
     Pointer heap_label_index;
     std::map<std::string, Pointer> label_map;
+    
+    std::map<std::string, Pointer> preprocess_proc_map;
     std::map<std::string, Pointer> proc_map;
 };
 

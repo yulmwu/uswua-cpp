@@ -67,7 +67,7 @@ Opcode to_opcode(string opcode, Pointer pointer) {
     CASE_OPCODE("dbg", DBG)
     CASE_OPCODE("exit", EXIT)
 
-    throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, pointer);
+    throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, pointer, opcode);
 }
 
 Instructions Parser::parse() {
@@ -159,7 +159,7 @@ Op Parser::parse_op_jmp(Opcode opcode, string operand) {
         if (value != this->label_map.end()) {
             return Op(opcode, value->second);
         } else {
-            throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer);
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer, operand);
         }
     } else {
         return Op(opcode, (Pointer)stoi(operand));
@@ -172,10 +172,16 @@ Op Parser::parse_op_proc(Opcode opcode, string operand) {
     } else if (operand.starts_with("[") && operand.ends_with("]")) {
         string r = operand.substr(1, operand.length() - 2);
         return Op(opcode, (Pointer)(this->pointer + stoi(r)));
-        //    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
-        //
-        ////        this->proc_map.insert(operand, )
-        //    }
+    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
+        this->proc_map.insert_or_assign(operand, this->pointer);
+
+        auto value = this->preprocess_proc_map.find(operand);
+
+        if (value != this->preprocess_proc_map.end()) {
+            return Op(opcode, value->second);
+        } else {
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer, operand);
+        }
     } else {
         return Op(opcode, (Value)stoi(operand));
     }
@@ -187,9 +193,14 @@ Op Parser::parse_op_call(Opcode opcode, string operand) {
     } else if (operand.starts_with("[") && operand.ends_with("]")) {
         string r = operand.substr(1, operand.length() - 2);
         return Op(opcode, (Pointer)(this->pointer + stoi(r)));
-        //    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
-        //        // TODO
-        //    }
+    } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
+        auto value = this->proc_map.find(operand);
+
+        if (value != this->proc_map.end()) {
+            return Op(opcode, value->second);
+        } else {
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer, operand);
+        }
     } else {
         return Op(opcode, (Value)stoi(operand));
     }
@@ -216,8 +227,18 @@ bool Parser::preprocessing(vector<string> args) {
 
         if (name == "startptr") {
             this->vm_options.startPtr = (Pointer)stoi(arguments[0]);
+        } else if (name == "pstart") {
+            this->preprocess_proc_map.insert_or_assign(arguments[0], this->pointer + 1);
+        } else if (name == "pend") {
+            auto value = this->preprocess_proc_map.find(arguments[0]);
+
+            if (value != this->preprocess_proc_map.end()) {
+                this->preprocess_proc_map[arguments[0]] = this->pointer - value->second;
+            } else {
+                throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer, arguments[0]);
+            }
         } else {
-            throw BytecodeError(BytecodeError::BytecodeErrorKind::UnknownPreprocessor, pointer);
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::UnknownPreprocessor, pointer, name);
         }
     } else if (args[0].ends_with(":")) {
         args[0].pop_back();
