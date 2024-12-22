@@ -1,29 +1,44 @@
 #include "error.hpp"
+#include <sstream>
 
 using namespace std;
 
-BytecodeError::BytecodeError(BytecodeErrorKind kind, Pointer ptr)
-    : kind_(kind), ptr(ptr) {}
-
 const char* BytecodeError::what() const noexcept {
+    stringstream ss;
+
     switch (this->kind_) {
         case BytecodeErrorKind::EmptyStack:
-            return "Empty Stack";
+            ss << "Empty Stack";
+            break;
         case BytecodeErrorKind::InvalidOpcode:
-            return "Invalid Opcode";
+            ss << "Invalid Opcode";
+            break;
         case BytecodeErrorKind::EmptyOperand:
-            return "Empty Operand";
+            ss << "Empty Operand";
+            break;
         case BytecodeErrorKind::NotFound:
-            return "Not Found";
+            ss << "Not Found";
+            break;
         case BytecodeErrorKind::EmptyCallStack:
-            return "Empty CallStack";
+            ss << "Empty CallStack";
+            break;
         case BytecodeErrorKind::UnknownCallNo:
-            return "Unknown Call Number";
+            ss << "Unknown Call Number";
+            break;
         case BytecodeErrorKind::IdentifierNotFound:
-            return "Identifier Not Found";
+            ss << "Identifier Not Found";
+            break;
         case BytecodeErrorKind::UnknownPreprocessor:
-            return "Unknown Preprocessor";
+            ss << "Unknown Preprocessor";
+            break;
     }
+    
+    if (this->opcode_) ss << ": " << this->opcode_.value();
+    if (this->pointer_) ss << ": " << this->pointer_.value();
+    if (this->identifier_) ss << ": " << this->identifier_.value();
+    
+    this->message = ss.str();
+    return this->message.c_str();
 }
 
 Pointer BytecodeError::where() const noexcept {
