@@ -46,7 +46,7 @@ Opcode to_opcode(uint8_t value, Pointer ptr) {
         case 0x30: return Opcode::VMCALL;
         case 0xFE: return Opcode::DBG;
         case 0xFF: return Opcode::EXIT;
-        default: throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, ptr);
+        default: throw BytecodeError(BytecodeError::BytecodeErrorKind::InvalidOpcode, ptr, value);
     }
 }
 
