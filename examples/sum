@@ -1,10 +1,13 @@
+#STARTPTR 0
+
 PUSH 0x00           ; r = 0
 STORE r             ;
 
 PUSH 0x01           ; i = 1
 STORE i             ;
 
-PROC 14             ; def f():
+#pstart F
+PROC F              ; def f():
     LOAD r          ;
     LOAD i          ;
     ADD             ;
@@ -25,8 +28,9 @@ _CASE_TRUE:
 
 _CASE_FALSE:
     RET             ;       else: return
+#pend F
 
-CALL 4              ; f()
+CALL D              ; f()
 
 LOAD r
 LOAD i
