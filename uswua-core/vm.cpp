@@ -244,7 +244,7 @@ Value Vm::vmcall(Pointer callno) {
             break;
         }
         default: {
-            throw BytecodeError(BytecodeError::BytecodeErrorKind::UnknownCallNo, this->ptr);
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::UnknownCallNo, this->ptr, callno);
         }
     }
     
