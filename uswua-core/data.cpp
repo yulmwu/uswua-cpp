@@ -1,8 +1,10 @@
-//
-//  data.cpp
-//  uswua-cpp
-//
-//  Created by Kim Jun Young on 12/26/24.
-//
-
 #include "data.hpp"
+#include "error.hpp"
+
+Value Data::get(Pointer ptr) {
+    if (ptr >= this->data.size()) {
+        throw BytecodeError(BytecodeError::BytecodeErrorKind::IndexOutOfRange, ptr);
+    }
+    return this->data.back();
+}
+
