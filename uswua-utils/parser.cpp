@@ -42,6 +42,7 @@ Opcode to_opcode(string opcode, Pointer pointer) {
     CASE_OPCODE("pop", POP)
     CASE_OPCODE("del", DEL)
     CASE_OPCODE("dup", DUP)
+    CASE_OPCODE("dload", DLOAD)
     CASE_OPCODE("add", ADD)
     CASE_OPCODE("sub", SUB)
     CASE_OPCODE("mul", MUL)
@@ -111,7 +112,7 @@ optional<Op> Parser::parse_op(vector<string> op) {
     auto opcode = to_opcode(_opcode, this->pointer);
     auto operand = op[1];
     
-    if (opcode == Opcode::PUSH) {
+    if (opcode == Opcode::PUSH || opcode == Opcode::DLOAD) {
         return this->parse_op_push(opcode, operand);
     } else if (opcode == Opcode::STORE || opcode == Opcode::LOAD || opcode == Opcode::DEL) {
         return this->parse_op_heap_op(opcode, operand);
