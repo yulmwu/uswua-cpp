@@ -7,6 +7,7 @@
 #include "opcode.hpp"
 #include "stack.hpp"
 #include "heap.hpp"
+#include "data.hpp"
 #include "error.hpp"
 
 enum class OpExecuted {
@@ -24,14 +25,16 @@ public:
     Instructions instructions;
     VmOptions options;
 
+    // Memory Section
     Stack& stack;
     Heap& heap;
+    Data& data;
 
-    Vm(Instructions instructions, Stack& stack, Heap& heap)
-        : instructions(instructions), stack(stack), heap(heap) {}
+    Vm(Instructions instructions, Stack& stack, Heap& heap, Data& data)
+        : instructions(instructions), stack(stack), heap(heap), data(data) {}
     
-    Vm(Instructions instructions, Stack& stack, Heap& heap, VmOptions options)
-        : instructions(instructions), stack(stack), heap(heap), options(options) {}
+    Vm(Instructions instructions, Stack& stack, Heap& heap, Data& data, VmOptions options)
+        : instructions(instructions), stack(stack), heap(heap), data(data), options(options) {}
     
 
     void execute();

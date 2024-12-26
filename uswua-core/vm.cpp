@@ -66,6 +66,11 @@ OpExecuted Vm::executeOp(Op &op) {
             this->stack.push(value);
             break;
         }
+        case Opcode::DLOAD: {
+            auto addr = (Pointer)this->getOperand(op);
+            this->stack.push(this->data.get(addr));
+            break;
+        }
         case Opcode::ADD: {
             auto left = this->stack.pop(this->ptr);
             auto right = this->stack.pop(this->ptr);
