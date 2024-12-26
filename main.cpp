@@ -19,6 +19,8 @@ int main() {
     auto code = R"(
 #STARTPTR 0
 
+.foo 0x0A
+
 PUSH 0x00           ; r = 0
 STORE r             ;
 
@@ -38,7 +40,7 @@ PROC F              ; def f():
     STORE i         ;     i = i + 1
 
     LOAD i          ;
-    DLOAD 0x00      ;
+    DLOAD .foo      ;
     GTE             ;
     JIF _CASE_FALSE ;    if 10 >= i:
 
@@ -61,9 +63,8 @@ LOAD i
 
         Stack stack;
         Heap heap;
-        Data data({ 0x0A });
 
-        Vm vm = Vm(instructions, stack, heap, data, p.vm_options);
+        Vm vm = Vm(instructions, stack, heap, p.data, p.vm_options);
 
         vm.execute();
 
