@@ -30,7 +30,7 @@ _CASE_FALSE:
     RET             ;       else: return
 #pend F
 
-CALL D              ; f()
+CALL F              ; f()
 
 LOAD r
 LOAD i

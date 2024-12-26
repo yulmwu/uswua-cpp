@@ -1,1 +1,3 @@
-
+START:
+    PUSH 10
+    CALL
