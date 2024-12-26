@@ -21,6 +21,7 @@ public:
     
     std::optional<Op> parse_op(std::vector<std::string>);
     Op parse_op_push(Opcode, std::string);
+    Op parse_op_dload(Opcode, std::string);
     Op parse_op_heap_op(Opcode, std::string);
     Op parse_op_jmp(Opcode, std::string);
     Op parse_op_proc(Opcode, std::string);
@@ -41,6 +42,8 @@ private:
     
     std::map<std::string, Pointer> preprocess_proc_map;
     std::map<std::string, Pointer> proc_map;
+    
+    std::map<std::string, Pointer> data_map;
 };
 
 #endif /* parser_hpp */

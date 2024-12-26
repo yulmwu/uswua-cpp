@@ -112,10 +112,12 @@ optional<Op> Parser::parse_op(vector<string> op) {
     auto opcode = to_opcode(_opcode, this->pointer);
     auto operand = op[1];
     
-    if (opcode == Opcode::PUSH || opcode == Opcode::DLOAD) {
+    if (opcode == Opcode::PUSH) {
         return this->parse_op_push(opcode, operand);
     } else if (opcode == Opcode::STORE || opcode == Opcode::LOAD || opcode == Opcode::DEL) {
         return this->parse_op_heap_op(opcode, operand);
+    } else if (opcode == Opcode::DLOAD) {
+        return this->parse_op_dload(opcode, operand);
     } else if (opcode == Opcode::JMP || opcode == Opcode::JIF) {
         return this->parse_op_jmp(opcode, operand);
     } else if (opcode == Opcode::PROC) {
@@ -136,6 +138,26 @@ Op Parser::parse_op_push(Opcode opcode, string operand) {
         return Op(opcode, (Value)stoi(operand));
     }
 }
+
+Op Parser::parse_op_dload(Opcode opcode, string operand) {
+    if (operand.starts_with("0x")) {
+        return Op(opcode, (Value)stoi(operand, 0, 16));
+    } else if (operand.starts_with('.')) {
+        operand.erase(0, 1);
+        transform(operand.begin(), operand.end(), operand.begin(), ::tolower);
+        
+        auto value = this->data_map.find(operand);
+        
+        if (value != this->data_map.end()) {
+            return Op(opcode, value->second);
+        } else {
+            throw BytecodeError(BytecodeError::BytecodeErrorKind::IdentifierNotFound, pointer, operand);
+        }
+    } else {
+        return Op(opcode, (Value)stoi(operand));
+    }
+}
+
 
 Op Parser::parse_op_heap_op(Opcode opcode, string operand) {
     if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$"))) {
@@ -191,9 +213,6 @@ Op Parser::parse_op_proc(Opcode opcode, string operand) {
 Op Parser::parse_op_call(Opcode opcode, string operand) {
     if (operand.starts_with("0x")) {
         return Op(opcode, (Pointer)stoi(operand, 0, 16));
-    } else if (operand.starts_with("[") && operand.ends_with("]")) {
-        string r = operand.substr(1, operand.length() - 2);
-        return Op(opcode, (Pointer)(this->pointer + stoi(r)));
     } else if (regex_match(operand, regex("^[a-zA-Z_][a-zA-Z0-9_]*$")))  {
         auto value = this->proc_map.find(operand);
 
@@ -210,9 +229,6 @@ Op Parser::parse_op_call(Opcode opcode, string operand) {
 Op Parser::parse_op_dbg(Opcode opcode, string operand) {
     if (operand.starts_with("0x")) {
         return Op(opcode, (Pointer)stoi(operand, 0, 16));
-    } else if (operand.starts_with("[") && operand.ends_with("]")) {
-        string r = operand.substr(1, operand.length() - 2);
-        return Op(opcode, (Pointer)(this->pointer + stoi(r)));
     } else {
         return Op(opcode, (Pointer)stoi(operand));
     }
@@ -244,6 +260,20 @@ bool Parser::preprocessing(vector<string> args) {
     } else if (args[0].ends_with(":")) {
         args[0].pop_back();
         this->label_map.insert_or_assign(args[0], this->pointer);
+    } else if (args[0].starts_with('.')) {
+        args[0].erase(0, 1);
+        auto name = args[0];
+        transform(name.begin(), name.end(), name.begin(), ::tolower);
+
+        auto arguments = vector(args.begin() + 1, args.end());
+        
+        if (arguments[0].starts_with("0x")) {
+            this->data.push((Value)stoi(arguments[0], 0, 16));
+        } else {
+            this->data.push((Value)stoi(arguments[0]));
+        }
+        
+        this->data_map.insert_or_assign(name, this->data.data.size() - 1);
     } else {
         return false;
     }
