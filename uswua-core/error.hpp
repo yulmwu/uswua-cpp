@@ -14,6 +14,7 @@ public:
         NotFound,
         EmptyCallStack,
         UnknownCallNo,
+        IndexOutOfRange,
         IdentifierNotFound,
         UnknownPreprocessor
     };

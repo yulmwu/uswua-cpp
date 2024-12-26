@@ -25,6 +25,9 @@ const char* BytecodeError::what() const noexcept {
         case BytecodeErrorKind::UnknownCallNo:
             ss << "Unknown Call Number";
             break;
+        case BytecodeErrorKind::IndexOutOfRange:
+            ss << "Index Out Of Range";
+            break;
         case BytecodeErrorKind::IdentifierNotFound:
             ss << "Identifier Not Found";
             break;
