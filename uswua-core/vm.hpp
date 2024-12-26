@@ -5,10 +5,8 @@
 #include <vector>
 
 #include "opcode.hpp"
-#include "stack.hpp"
-#include "heap.hpp"
-#include "data.hpp"
 #include "error.hpp"
+#include "memory/memory.hpp"
 
 enum class OpExecuted {
     OK,

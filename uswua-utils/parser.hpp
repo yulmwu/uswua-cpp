@@ -7,11 +7,13 @@
 
 #include "../uswua-core/opcode.hpp"
 #include "../uswua-core/vm.hpp"
+#include "../uswua-core/memory/memory.hpp"
 
 class Parser {
 public:
     std::string content;
     VmOptions vm_options;
+    Data data;
     
     Parser(std::string content) : content(content), pointer(0), heap_label_index(0) {}
 
@@ -31,9 +33,10 @@ public:
 
 private:
     Pointer pointer;
-
+    
     std::map<std::string, Pointer> heap_label_map;
     Pointer heap_label_index;
+
     std::map<std::string, Pointer> label_map;
     
     std::map<std::string, Pointer> preprocess_proc_map;

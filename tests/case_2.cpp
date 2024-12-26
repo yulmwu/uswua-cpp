@@ -4,7 +4,7 @@
 #include "tests.cpp"
 #include "../uswua-core/opcode.hpp"
 #include "../uswua-core/vm.hpp"
-#include "../uswua-core/stack.hpp"
+#include "../uswua-core/memory/memory.hpp"
 
 using namespace std;
 

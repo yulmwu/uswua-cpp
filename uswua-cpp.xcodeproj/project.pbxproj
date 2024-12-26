@@ -64,6 +64,7 @@
 		97DE57782D1CD33500D3370A /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		97EEBFD92CF93CA1001FF479 /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parser.cpp; sourceTree = "<group>"; };
 		97EEBFDA2CF93CA1001FF479 /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = parser.hpp; sourceTree = "<group>"; };
+		97F99A7B2D1CF63200DD70AF /* memory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = memory.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,20 +140,29 @@
 		97A9CC642C6E3723000DC5BF /* uswua-core */ = {
 			isa = PBXGroup;
 			children = (
+				97F99A7A2D1CF61400DD70AF /* memory */,
 				97A9DB112C70C4BA00185295 /* vm.cpp */,
 				97A9DB122C70C4BA00185295 /* vm.hpp */,
 				97A9CC702C6E39F8000DC5BF /* opcode.cpp */,
 				97A9CC712C6E39F8000DC5BF /* opcode.hpp */,
 				97A9DB0B2C70C01400185295 /* error.cpp */,
 				97A9DB0C2C70C01400185295 /* error.hpp */,
+			);
+			path = "uswua-core";
+			sourceTree = "<group>";
+		};
+		97F99A7A2D1CF61400DD70AF /* memory */ = {
+			isa = PBXGroup;
+			children = (
 				97A9DB0E2C70C30100185295 /* stack.cpp */,
 				97A9DB0F2C70C30100185295 /* stack.hpp */,
 				97C1DEC52D0A4FB00026EF9C /* heap.cpp */,
 				97C1DEC62D0A4FB00026EF9C /* heap.hpp */,
 				97DE57772D1CD33500D3370A /* data.cpp */,
 				97DE57782D1CD33500D3370A /* data.hpp */,
+				97F99A7B2D1CF63200DD70AF /* memory.hpp */,
 			);
-			path = "uswua-core";
+			path = memory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
