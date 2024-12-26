@@ -16,6 +16,7 @@ Instructions b2i_from(vector<unsigned char> bytes) {
             case STORE:
             case LOAD:
             case DEL:
+            case DLOAD:
             case PROC:
             case CALL:
             case JMP:
