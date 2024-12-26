@@ -11,7 +11,8 @@ struct Data {
     Data() = default;
     Data(std::vector<Value> data): data(data) {}
 
-    Value get(Pointer);
+    void push(Value);
+    Value get(Pointer, Pointer);
 };
 
 #endif /* data_hpp */
