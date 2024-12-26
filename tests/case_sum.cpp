@@ -41,7 +41,9 @@ TEST_CASE(case_sum) {
     
     Stack stack;
     Heap heap;
-    Vm vm = Vm(instructions, stack, heap);
+    Data data;
+
+    Vm vm = Vm(instructions, stack, heap, data);
     vm.execute();
 
     ASSERT_EQ(stack.data[0], 55);

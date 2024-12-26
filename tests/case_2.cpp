@@ -18,7 +18,9 @@ TEST_CASE(case_2) {
     
     Stack stack;
     Heap heap;
-    Vm vm = Vm(tests, stack, heap);
+    Data data;
+
+    Vm vm = Vm(tests, stack, heap, data);
     vm.execute();
     vm.stackDump();
 
