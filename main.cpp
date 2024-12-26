@@ -38,7 +38,7 @@ PROC F              ; def f():
     STORE i         ;     i = i + 1
 
     LOAD i          ;
-    PUSH 0x0A       ;
+    DLOAD 0x00      ;
     GTE             ;
     JIF _CASE_FALSE ;    if 10 >= i:
 
@@ -49,7 +49,7 @@ _CASE_FALSE:
     RET             ;       else: return
 #pend F
 
-CALL D              ; f()
+CALL F              ; f()
 
 LOAD r
 LOAD i
@@ -61,7 +61,9 @@ LOAD i
 
         Stack stack;
         Heap heap;
-        Vm vm = Vm(instructions, stack, heap, p.vm_options);
+        Data data({ 0x0A });
+
+        Vm vm = Vm(instructions, stack, heap, data, p.vm_options);
 
         vm.execute();
 
