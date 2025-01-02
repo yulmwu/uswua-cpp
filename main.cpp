@@ -8,6 +8,7 @@
 
 #include "uswua-utils/b2i.hpp"
 #include "uswua-utils/parser.hpp"
+#include "uswua-utils/html_logger.hpp"
 
 #include "tests/tests_all.cpp"
 
@@ -68,9 +69,12 @@ LOAD i
 
         vm.execute();
 
-        cout << vm.stackDump() << endl;
-        cout << "-----" << endl;
-        cout << vm.heapDump() << endl;
+//        cout << vm.stackDump() << endl;
+//        cout << "-----" << endl;
+//        cout << vm.heapDump() << endl;
+        
+        HTMLLogger logger(vm.logs);
+        cout << logger.html() << endl;
     } catch (BytecodeError error) {
         cout << error.what() << " at " << error.where() << endl;
     }
