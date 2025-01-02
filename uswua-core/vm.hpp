@@ -7,6 +7,7 @@
 #include "opcode.hpp"
 #include "error.hpp"
 #include "memory/memory.hpp"
+#include "../uswua-utils/html_logger.hpp"
 
 enum class OpExecuted {
     OK,
@@ -22,6 +23,8 @@ class Vm {
 public:
     Instructions instructions;
     VmOptions options;
+
+    std::vector<LogMessage> logs;
 
     // Memory Section
     Stack& stack;
@@ -46,6 +49,7 @@ public:
     
 private:
     Pointer ptr = 0;
+    Pointer steps = 0;
     std::vector<Pointer> callStack;
 };
 

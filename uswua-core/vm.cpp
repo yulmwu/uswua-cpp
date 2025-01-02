@@ -14,6 +14,7 @@ void Vm::execute() {
     
     while (this->instructions.size() > this->ptr) {
         auto result = this->executeOp(this->instructions[this->ptr]);
+        this->steps++;
         
         if (result == OpExecuted::CONTINUE) {
             continue;
@@ -26,10 +27,14 @@ void Vm::execute() {
 }
 
 OpExecuted Vm::executeOp(Op &op) {
+    auto result = OpExecuted::OK;
+    auto logKind = LogKind::OK;
+    auto currentPtr = this->ptr;
+    
     switch (op.opcode) {
         case Opcode::NOOP: break;
         case Opcode::PUSH: {
-            this->stack.push(getOperand(op));
+            this->stack.push(this->getOperand(op));
             break;
         }
         case Opcode::STORE: {
@@ -184,12 +189,14 @@ OpExecuted Vm::executeOp(Op &op) {
         }
         case Opcode::PROC: {
             this->ptr = this->ptr + ((Pointer)this->getOperand(op)) + 1;
-            return OpExecuted::CONTINUE;
+            result = OpExecuted::CONTINUE;
+            break;
         }
         case Opcode::CALL: {
             this->callStack.push_back(this->ptr + 1);
             this->ptr = (Pointer)this->getOperand(op) + 1;
-            return OpExecuted::CONTINUE;
+            result = OpExecuted::CONTINUE;
+            break;
         }
         case Opcode::RET: {
             if (this->callStack.empty()) {
@@ -200,16 +207,19 @@ OpExecuted Vm::executeOp(Op &op) {
             this->callStack.pop_back();
             
             this->ptr = ptr;
-            return OpExecuted::CONTINUE;
+            result = OpExecuted::CONTINUE;
+            break;
         }
         case Opcode::JMP: {
             this->ptr = (Pointer)this->getOperand(op);
-            return OpExecuted::CONTINUE;
+            result = OpExecuted::CONTINUE;
+            break;
         }
         case Opcode::JIF: {
             if (this->stack.pop(this->ptr) == 0) {
                 this->ptr = (Pointer)this->getOperand(op);
-                return OpExecuted::CONTINUE;
+                result = OpExecuted::CONTINUE;
+                break;
             }
             
             break;
@@ -226,11 +236,14 @@ OpExecuted Vm::executeOp(Op &op) {
             break;
         }
         case Opcode::EXIT: {
-            return OpExecuted::BREAK;
+            result = OpExecuted::BREAK;
+            break;
         }
     }
 
-    return OpExecuted::OK;
+    this->logs.push_back(LogMessage(op, logKind, this->ptr, this->steps, this->stackDump(), this->heapDump()));
+    
+    return result;
 }
 
 Value Vm::vmcall(Pointer callno) {
@@ -266,6 +279,10 @@ Value Vm::getOperand(Op& op) {
 
 string Vm::stackDump() {
     stringstream ss;
+    
+    if (this->stack.data.empty()) {
+        return "Empty Stack";
+    }
     
     vector<Value> arr = this->stack.data;
     arr.resize(((arr.size() + 15) / 16) * 16, 0);
@@ -308,7 +325,7 @@ string Vm::heapDump() {
     stringstream ss;
 
     if (this->heap.data.empty()) {
-        return "Heap is empty";
+        return "Empty Heap";
     }
 
     Pointer min_address = this->heap.data.begin()->first;
