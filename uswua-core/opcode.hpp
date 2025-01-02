@@ -62,6 +62,7 @@ struct Op {
 };
 
 Opcode to_opcode(uint8_t value, Pointer ptr = 0);
+std::string to_string(Opcode);
 
 std::ostream& operator<<(std::ostream& os, const Opcode& opcode);
 std::ostream& operator<<(std::ostream& os, const Op& op);
