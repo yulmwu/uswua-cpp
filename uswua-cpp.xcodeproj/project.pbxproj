@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		971ADCA62CF00B5300BA4EDB /* b2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971ADCA12CEFF7D400BA4EDB /* b2i.cpp */; };
+		97697FA22D1E2C0E006C9FDD /* html_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97697FA02D1E2C0E006C9FDD /* html_logger.cpp */; };
 		97A9CC722C6E39F8000DC5BF /* opcode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC702C6E39F8000DC5BF /* opcode.cpp */; };
 		97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9CC732C6E44BB000DC5BF /* main.cpp */; };
 		97A9DB0D2C70C01400185295 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97A9DB0B2C70C01400185295 /* error.cpp */; };
@@ -41,6 +42,8 @@
 		971D21782CBAB12700722147 /* tests_all.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests_all.cpp; sourceTree = "<group>"; };
 		971D21792CBAB16C00722147 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		972EC86F2D02838A008E31DE /* fib */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = fib; sourceTree = "<group>"; };
+		97697FA02D1E2C0E006C9FDD /* html_logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = html_logger.cpp; sourceTree = "<group>"; };
+		97697FA12D1E2C0E006C9FDD /* html_logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = html_logger.hpp; sourceTree = "<group>"; };
 		978E1D1B2CC1D61600BE7B59 /* case_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_2.cpp; sourceTree = "<group>"; };
 		97A166802CF9579000EA875C /* case_parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = case_parser.cpp; sourceTree = "<group>"; };
 		97A9CC622C6E3723000DC5BF /* uswua-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "uswua-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +99,8 @@
 				97C69E6E2CF6959500E7DFA5 /* time.hpp */,
 				97EEBFD92CF93CA1001FF479 /* parser.cpp */,
 				97EEBFDA2CF93CA1001FF479 /* parser.hpp */,
+				97697FA02D1E2C0E006C9FDD /* html_logger.cpp */,
+				97697FA12D1E2C0E006C9FDD /* html_logger.hpp */,
 			);
 			path = "uswua-utils";
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				97A9DB132C70C4BA00185295 /* vm.cpp in Sources */,
 				97C1DEC72D0A4FB00026EF9C /* heap.cpp in Sources */,
 				97DE57792D1CD33500D3370A /* data.cpp in Sources */,
+				97697FA22D1E2C0E006C9FDD /* html_logger.cpp in Sources */,
 				97C69E6F2CF6959500E7DFA5 /* time.cpp in Sources */,
 				97A9DB102C70C30100185295 /* stack.cpp in Sources */,
 				97A9CC752C6E44BB000DC5BF /* main.cpp in Sources */,
